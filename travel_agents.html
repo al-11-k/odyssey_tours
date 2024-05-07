@@ -5,35 +5,194 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traveler Agents</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-    <h1>Traveler Agents</h1>
-    <div id="nav_bar">
-        <button>
-            <a href="travelers.html">Travelers</a>
-        </button>
-        
-        <button>
-            <a href="travel_agents.html">Travel Agents</a>
-        </button> 
-
-        <button>
-            <a href="travel_packages.html">Travel Packages</a>
-        </button>
-
-        <button>
-            <a href="bookings.html">Bookings</a>
-        </button>
-
-        <button>
-            <a href="items.html">Items</a>
-        </button>
-
-        <button>
-            <a href="item_types.html">Item Types</a>
-        </button>
+    <script>
+        function showform(dowhat) {
+              /*
+              * four DIVS: browse, insert, update, delete
+              * this function sets one visible the others not
+              */
+              if (dowhat == 'insert'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'block';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'none';
+              }
+              else if (dowhat == 'update'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'block';
+                  document.getElementById('delete').style.display = 'none';
+              }
+              else if (dowhat == 'delete'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'block';
+              }
+        else if (dowhat == 'all'){
+                  document.getElementById('browse').style.display = 'block';
+                  document.getElementById('insert').style.display = 'block';
+                  document.getElementById('update').style.display = 'block';
+                  document.getElementById('delete').style.display = 'block';
+              }
+              else { //by default display browse
+                  document.getElementById('browse').style.display = 'block';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'none';
+              }
+          }
+  
+        function newTraveleAgent() { showform('insert'); }
+        function updateTravelAgent(pid) { showform('update'); }
+        function deleteTravelAgent(pid) { showform ('delete'); }
+        function browseTravelAgents() { showform ('browse'); }
+        function showAll() { showform ('all'); }
+      </script>
+    </head>
+  <body>
+      <h1>Travel Agents</h1>
+      <div id="nav_bar">
+          <button>
+              <a href="travelers.html">Travelers</a>
+          </button>
+          
+          <button>
+              <a href="travel_agents.html">Travel Agents</a>
+          </button> 
+  
+          <button>
+              <a href="travel_packages.html">Travel Packages</a>
+          </button>
+  
+          <button>
+              <a href="bookings.html">Bookings</a>
+          </button>
+  
+          <button>
+              <a href="items.html">Items</a>
+          </button>
+  
+          <button>
+              <a href="item_types.html">Item Types</a>
+          </button>
+      </div>
+  
+      <div id="browse">
+        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+        <table border="1" cellpadding="5">
+            <tr>
+              <th><a href="#" onClick="newTravelAgent()" style="color:#FF88AA">New</a></th>
+              <th></th>
+              <th>agent_id</th>
+              <th>first_name</th>
+              <th>last_name</th>
+              <th>email</th>
+              <th>total_sales</th>
+              <th>total_clients</th>
+            </tr>
+            <tr>
+              <td><a href="#" onClick="updateTravelAgent('this.personID')" style="color:#924FF1">Edit</a></td>
+              <td><a href="#" onclick="deleteTravelAgent('this.personID')" style="color:#FFD3CF">Delete</a></td>
+              <td align="right" >1</td>
+              <td >Chris</td>
+              <td align="right" >Spreadsheet</td>
+              <td>csheet@gmail.com</td>
+              <td>30</td>
+              <td>32</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateTravelAgent('this.personID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteTravelAgent('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td align="right" >2</td>
+                <td >Delores</td>
+                <td align="right" >Umbridge</td>
+                <td>dubridge@gmail.com</td>
+                <td>2</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td><a href="#" onClick="updateTravelAgent('this.personID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteTravelAgent('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td align="right" >3</td>
+                <td >Satoru</td>
+                <td align="right" >Gojo</td>
+                <td>gojo@gmail.com</td>
+                <td>1000</td>
+                <td>1000</td>
+              </tr>
+              <tr>
+                <td><a href="#" onClick="updateTravelAgent('this.personID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteTravelAgent('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td align="right" >4</td>
+                <td >Some</td>
+                <td align="right" >Guy</td>
+                <td>someg@gmail.com</td>
+                <td>100</td>
+                <td>90</td>
+              </tr>
+          </table>
+        </div>
+      
+  
+  
+        <div id="insert">
+          <form method="POST" id="addTravelAgent">
+              <legend><strong>Add Travel Agent</strong></legend>
+                <fieldset class="fields">
+                    <!--so i didn't have the total clients and total sales here because
+                    i think that is something we automatically want calculated. So it would just
+                    initialize to 0-->
+                  <label> First Name </label> <input type="text" name="fname">
+                  <label> Last Name </label> <input type="text" name="lname">
+                  <label> Email </label> <input type="text" name="email">
+              </fieldset>
+                <div class="buttonDivs">
+                  <input class="affirmButton" type="submit" id="addTravelAgent" value="Add Travel Agent">
+                  <input class="cancel" type="button" value="Cancel" onClick="browseTravelAgents()">
+                </div>
+          </form> 
+      </div>
+  
+  
+      <div id="update">
+        <form method="POST" id="UpdateTravelAgent">
+            <legend><strong>Update Travel Agent</strong></legend>
+              <fieldset class="fields">
+              <input type="hidden" name="browseTravelAgents" id="updateTravelAgentID" value="1">
+              <label> ID: </label> 1
+              <!--i did put to option to edit the sales and client count here
+                in case there was an error that needed to be fixed manually or something-->
+                <label> First Name </label> <input type="text" name="fname" value="Chris">
+                <label> Last Name </label> <input type="text" name="lname" value="Spreadsheet">
+                <label> Email </label> <input type="text" name="email" value="csheet@gmail.com">
+                <label> Total Sales </label> <input type="number" name="total_sales" value="30">
+                <label> Total Clients </label> <input type="number" name="total_clients" value="32">
+          </fieldset>
+              <div class="buttonDivs">
+                <input class="affirmButton" type="submit" id="UpdateSaveTravelAgent" value="Update Travel Agent">
+                <input class="cancel" type="button" value="Cancel" onClick="browseTravelAgents()">
+              </div>
+        </form> 
     </div>
-
+  
+  
+    <div id="delete" style="display: block">
+      <form method="POST" id="deleteTravelAgent">
+          <legend><strong>Delete Travel Agent</strong></legend>
+              <fieldset class="fields">
+              <p>Are you sure you wish to delete the following?</p>
+              <input type="hidden" name="travelAgentID" id="deletetravelAgentID" value="1">
+              <label><strong>ID:</strong></label> 1
+                <label> <strong>Name:</strong> </label> Chris SpreadSheet
+                
+        </fieldset>
+          <div class="buttonDivs">
+            <input class="affirmButton" type="submit" id="DeleteTravelAgent" value="Delete Travel Agebt">
+            <input class="cancel" type="button" value="Cancel" onClick="browseTravelAgents()">
+          </div>
+        </form> 
+    </div>
           
        
     

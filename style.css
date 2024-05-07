@@ -31,8 +31,94 @@ button:active {
 
 table{
     margin: 70px 300px;
-    background: #391b71;
+    background-color: #391b71;
     padding: 100px;
-    border: none;
-    border-radius: 20px;
+    border-collapse: collapse;
 }
+
+#browse {
+    margin: auto;
+}
+
+#insert {
+    margin: 50px auto;
+    padding-top: 30px;
+}
+
+input {
+    padding: 12px 20px;
+    margin: 8px 17px 8px 0;
+    box-sizing: border-box;
+    border-radius: 6px;
+}
+
+legend{
+    margin-bottom: 12px;
+}
+
+fieldset {
+    border-radius: 6px;
+    border-color: #f4efee98;
+    background-color: #391b71;
+    padding: 20px 10px;
+
+}
+
+.buttonDivs {
+    margin-top: 12px;
+}
+
+.affirmButton{
+    border: none;
+    background-color: #FF88AA;
+    color:#2D135F;
+    font-size: 1em;
+    padding: 15px;
+    margin: 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 1em;
+}
+
+.affirmButton:hover{
+    background-color: #ff88aabe;
+}
+
+.affirmButton:active{
+    background-color: #ff88aa86;
+}
+
+#update{
+    margin: 50px auto;
+    padding-top: 30px;
+}
+
+.cancel{
+    border: none;
+    background-color:#FFD3CF;
+    color:#2D135F;
+    font-size: 1em;
+    padding: 15px;
+    margin: 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 1em;
+}
+
+.cancel:hover{
+    background-color:#ffd3cfc9;
+}
+
+.cancel:active{
+    background-color:#ffd3cf97;
+}
+
+#delete{
+    margin: 50px auto;
+    padding-top: 30px;
+}
+
+label{
+    margin-left: 12px;
+}
+

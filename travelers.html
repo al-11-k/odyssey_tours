@@ -5,7 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travelers</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
-</head>
+
+    <script>
+      function showform(dowhat) {
+			/*
+			* four DIVS: browse, insert, update, delete
+			* this function sets one visible the others not
+			*/
+			if (dowhat == 'insert'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'update'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'delete'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			}
+      else if (dowhat == 'all'){
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'block';
+			}
+			else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+
+      function newTraveler() { showform('insert'); }
+      function updateTraveler(pid) { showform('update'); }
+      function deleteTraveler(pid) { showform ('delete'); }
+      function browseTravelers() { showform ('browse'); }
+      function showAll() { showform ('all'); }
+    </script>
+  </head>
 <body>
     <h1>Travelers</h1>
     <div id="nav_bar">
@@ -34,45 +79,111 @@
         </button>
     </div>
 
+    <div id="browse">
+      <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+      <table border="1" cellpadding="5">
+          <tr>
+            <th><a href="#" onClick="newTraveler()" style="color:#FF88AA">New</a></th>
+            <th></th>
+            <th>traveler_id</th>
+            <th>first_name</th>
+            <th>last_name</th>
+            <th>email</th>
+            <th>phone_number</th>
+          </tr>
+          <tr>
+            <td><a href="#" onClick="updateTraveler('this.personID')" style="color:#924FF1">Edit</a></td>
+            <td><a href="#" onclick="deleteTraveler('this.personID')" style="color:#FFD3CF">Delete</a></td>
+            <td align="right" >1</td>
+            <td >Jane</td>
+            <td align="right" >Doe</td>
+            <td>janed@gmail.com</td>
+            <td>555-555-5555</td>
+          </tr>
+          <tr>
+            <td><a href="#" onClick="updateTraveler('this.personID')" style="color:#924FF1">Edit</a></td>
+            <td><a href="#" onclick="deleteTraveler('this.personID')" style="color: #FFD3CF">Delete</a></td>
+            <td align="right" >2</td>
+            <td>Joe</td>
+            <td align="right" >Brown</td>
+            <td >jbrown@gmail.com</td>
+            <td>505-525-2233</td>
+          </tr>
+          <tr>
+            <td><a href="#" onClick="updateTraveler('this.personID')" style="color:#924FF1">Edit</a></td>
+            <td><a href="#" onclick="deleteTraveler('this.personID')" style="color: #FFD3CF">Delete</a></td>
+            <td align="right">3</td>
+            <td>Ally</td>
+            <td align="right" >Karlis</td>
+            <td>akarlis@gmail.com</td>
+            <td>364-574-0292</td>
+          </tr>
+          <tr>
+            <td><a href="#" onClick="updateTraveler('this.personID')" style="color:#924FF1">Edit</a></td>
+            <td><a href="#" onclick="deleteTraveler('this.personID')" style="color: #FFD3CF">Delete</a></td>
+            <td align="right">4</td>
+            <td>Brittany</td>
+            <td align="right" >Healey</td>
+            <td>bhealey@gmail.com</td>
+            <td>364-373-2739</td>
+          </tr>
+        </table>
+      </div>
     
-    <table border="1" cellpadding="5">
-        <tr>
-          <th><a href="#" onClick="newCustomer()" style="color:#FF88AA">New</a></th>
-          <th></th>
-          <th>customer_id</th>
-          <th>first_name</th>
-          <th>last_name</th>
-          <th>email</th>
-          <th>phone_number</th>
-        </tr>
-        <tr>
-          <td><a href="#" onClick="updateCustomer('this.personID')" style="color:#924FF1">Edit</a></td>
-          <td><a href="#" onclick="deleteCustomer('this.personID')" style="color:#FFD3CF">Delete</a></td>
-          <td align="right" >1</td>
-          <td >Jane</td>
-          <td align="right" >Doe</td>
-          <td>janed@gmail.com</td>
-          <td>555-555-5555</td>
-        </tr>
-        <tr>
-          <td><a href="#" onClick="updateCustomer('this.personID')" style="color:#924FF1">Edit</a></td>
-          <td><a href="#" onclick="deleteCustomer('this.personID')" style="color: #FFD3CF">Delete</a></td>
-          <td align="right" >2</td>
-          <td>Joe</td>
-          <td align="right" >Brown</td>
-          <td >jbrown@gmail.com</td>
-          <td>505-525-2233</td>
-        </tr>
-        <tr>
-          <td><a href="#" onClick="updatePerson('this.personID')" style="color:#924FF1">Edit</a></td>
-          <td><a href="#" onclick="deletePerson('this.personID')" style="color: #FFD3CF">Delete</a></td>
-          <td align="right">3</td>
-          <td>Laura</td>
-          <td align="right" >Roslin</td>
-          <td>Caprica</td>
-          <td><em>NULL</em></td>
-        </tr>
-      </table>
+
+
+      <div id="insert">
+        <form method="POST" id="addTraveler">
+            <legend><strong>Add Traveler</strong></legend>
+              <fieldset class="fields">
+                <label> First Name </label> <input type="text" name="fname">
+                <label> Last Name </label> <input type="text" name="lname">
+                <label> Email </label> <input type="text" name="email">
+                <label> Phone Number </label> <input type="text" name="phone_num">
+            </fieldset>
+              <div class="buttonDivs">
+                <input class="affirmButton" type="submit" id="addTraveler" value="Add Traveler">
+                <input class="cancel" type="button" value="Cancel" onClick="browseTravelers()">
+              </div>
+        </form> 
+    </div>
+
+
+    <div id="update">
+      <form method="POST" id="UpdateTraveler">
+          <legend><strong>Update Traveler</strong></legend>
+            <fieldset class="fields">
+            <input type="hidden" name="browseTravelers" id="updateTravelerID" value="1">
+            <label> ID: </label> 1
+              <label> First Name </label> <input type="text" name="fname" value="Jane">
+              <label> Last Name </label> <input type="text" name="lname" value="Doe">
+              <label> Email </label> <input type="text" name="email" value="janed@gmail.com">
+              <label> Phone Number </label> <input type="text" name="phone_num" value="555-555-5555">
+        </fieldset>
+            <div class="buttonDivs">
+              <input class="affirmButton" type="submit" id="UpdateSaveTraveler" value="Update Traveler">
+              <input class="cancel" type="button" value="Cancel" onClick="browseTravelers()">
+            </div>
+      </form> 
+  </div>
+
+
+  <div id="delete" style="display: block">
+    <form method="POST" id="deleteTraveler">
+        <legend><strong>Delete Traveler</strong></legend>
+            <fieldset class="fields">
+            <p>Are you sure you wish to delete the following?</p>
+            <input type="hidden" name="travelerID" id="deletetravelerID" value="1">
+            <label><strong>ID:</strong></label> 1
+              <label> <strong>Name:</strong> </label> Jane Doe
+              
+      </fieldset>
+        <div class="buttonDivs">
+          <input class="affirmButton" type="submit" id="DeleteTraveler" value="Delete Traveler">
+          <input class="cancel" type="button" value="Cancel" onClick="browseTravelers()">
+        </div>
+      </form> 
+  </div>
     
 </body>
 </html>
