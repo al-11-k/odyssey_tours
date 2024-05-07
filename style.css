@@ -1,0 +1,38 @@
+body {
+    font-family: Verdana;
+    background-color: #2D135F;
+    color: #F4EFEE;
+    text-align: center;
+    display:grid;
+}
+
+a {
+    text-decoration: none;
+    color: #2D135F;
+}
+
+button {
+    background-color: #FF88AA;
+    border: none;
+    padding: 15px;
+    margin: 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #ff88aabe;
+}
+
+button:active {
+    background-color: #ff88aa86;
+}
+
+table{
+    margin: 70px 300px;
+    background: #391b71;
+    padding: 100px;
+    border: none;
+    border-radius: 20px;
+}

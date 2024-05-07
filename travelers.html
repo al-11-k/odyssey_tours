@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelers</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <h1>Travelers</h1>
+    <div id="nav_bar">
+        <button>
+            <a href="travelers.html">Travelers</a>
+        </button>
+        
+        <button>
+            <a href="travel_agents.html">Travel Agents</a>
+        </button> 
+
+        <button>
+            <a href="travel_packages.html">Travel Packages</a>
+        </button>
+
+        <button>
+            <a href="bookings.html">Bookings</a>
+        </button>
+
+        <button>
+            <a href="items.html">Items</a>
+        </button>
+
+        <button>
+            <a href="item_types.html">Item Types</a>
+        </button>
+    </div>
+
+    
+    <table border="1" cellpadding="5">
+        <tr>
+          <th><a href="#" onClick="newCustomer()" style="color:#FF88AA">New</a></th>
+          <th></th>
+          <th>customer_id</th>
+          <th>first_name</th>
+          <th>last_name</th>
+          <th>email</th>
+          <th>phone_number</th>
+        </tr>
+        <tr>
+          <td><a href="#" onClick="updateCustomer('this.personID')" style="color:#924FF1">Edit</a></td>
+          <td><a href="#" onclick="deleteCustomer('this.personID')" style="color:#FFD3CF">Delete</a></td>
+          <td align="right" >1</td>
+          <td >Jane</td>
+          <td align="right" >Doe</td>
+          <td>janed@gmail.com</td>
+          <td>555-555-5555</td>
+        </tr>
+        <tr>
+          <td><a href="#" onClick="updateCustomer('this.personID')" style="color:#924FF1">Edit</a></td>
+          <td><a href="#" onclick="deleteCustomer('this.personID')" style="color: #FFD3CF">Delete</a></td>
+          <td align="right" >2</td>
+          <td>Joe</td>
+          <td align="right" >Brown</td>
+          <td >jbrown@gmail.com</td>
+          <td>505-525-2233</td>
+        </tr>
+        <tr>
+          <td><a href="#" onClick="updatePerson('this.personID')" style="color:#924FF1">Edit</a></td>
+          <td><a href="#" onclick="deletePerson('this.personID')" style="color: #FFD3CF">Delete</a></td>
+          <td align="right">3</td>
+          <td>Laura</td>
+          <td align="right" >Roslin</td>
+          <td>Caprica</td>
+          <td><em>NULL</em></td>
+        </tr>
+      </table>
+    
+</body>
+</html>
