@@ -3,8 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traveler Packages</title>
+    <title>Travel Packages</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <script>
+        function showform(dowhat) {
+              /*
+              * four DIVS: browse, insert, update, delete
+              * this function sets one visible the others not
+              */
+              if (dowhat == 'insert'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'block';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'none';
+              }
+              else if (dowhat == 'update'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'block';
+                  document.getElementById('delete').style.display = 'none';
+              }
+              else if (dowhat == 'delete'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'block';
+              }
+        else if (dowhat == 'all'){
+                  document.getElementById('browse').style.display = 'block';
+                  document.getElementById('insert').style.display = 'block';
+                  document.getElementById('update').style.display = 'block';
+                  document.getElementById('delete').style.display = 'block';
+              }
+              else { //by default display browse
+                  document.getElementById('browse').style.display = 'block';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'none';
+              }
+          }
+  
+        function newTravelPackage() { showform('insert'); }
+        function updateTravelPackage(pid) { showform('update'); }
+        function deleteTravelPackage(pid) { showform ('delete'); }
+        function browseTravelPackages() { showform ('browse'); }
+        function showAll() { showform ('all'); }
+      </script>
 </head>
 <body>
     <h1>Traveler Packages</h1>
@@ -32,6 +76,115 @@
         <button>
             <a href="item_types.html">Item Types</a>
         </button>
+    </div>
+    <div id="browse">
+        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+        <table border="1" cellpadding="5">
+            <tr>
+              <th><a href="#" onClick="newTravelPackage()" style="color:#FF88AA">New</a></th>
+              <th></th>
+              <th>package_id</th>
+              <th>date_purchased</th>
+              <th>total_cost</th>
+              <th>traveler_id</th>
+              <th>agent_id</th>
+            </tr>
+            <tr>
+              <td><a href="#" onClick="updateTravelPackage('this.personID')" style="color:#924FF1">Edit</a></td>
+              <td><a href="#" onclick="deleteTravelPackage('this.personID')" style="color:#FFD3CF">Delete</a></td>
+              <td align="right" >1</td>
+              <td >2024-04-20</td>
+              <td align="right" >464</td>
+              <td>1</td>
+              <td>2</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateTravelPackage('this.personID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteTravelPackage('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td align="right" >2</td>
+                <td >2024-04-10</td>
+                <td align="right" >8280.58</td>
+                <td>2</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td><a href="#" onClick="updateTravelPackage('this.personID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteTravelPackage('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td align="right" >3</td>
+                <td >2024-04-01</td>
+                <td align="right" >232</td>
+                <td>4</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td><a href="#" onClick="updateTravelPackage('this.personID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteTravelPackage('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td align="right" >4</td>
+                <td >2024-03-29</td>
+                <td align="right" >280</td>
+                <td>3</td>
+                <td>4</td>
+              </tr>
+          </table>
+        </div>
+      
+  
+  
+        <div id="insert">
+          <form method="POST" id="addTravelPackage">
+              <legend><strong>Add Travel Package</strong></legend>
+                <fieldset class="fields">
+                    <!--so i didn't have the total clients and total sales here because
+                    i think that is something we automatically want calculated. So it would just
+                    initialize to 0-->
+                  <label> Date Purchased </label> <input type="text" name="date">
+                  <label> Total Cost </label> <input type="text" name="cost">
+              </fieldset>
+                <div class="buttonDivs">
+                  <input class="affirmButton" type="submit" id="addTravelPackage" value="Add Travel Package">
+                  <input class="cancel" type="button" value="Cancel" onClick="browseTravelPackages()">
+                </div>
+          </form> 
+      </div>
+  
+  
+      <div id="update">
+        <form method="POST" id="UpdateTravelPackage">
+            <legend><strong>Update Travel Package</strong></legend>
+              <fieldset class="fields">
+              <input type="hidden" name="browseTravelPackages" id="updateTravelPackageID" value="1">
+              <label> ID: </label> 1
+              <!--i did put to option to edit the sales and client count here
+                in case there was an error that needed to be fixed manually or something-->
+                <label> Date Purchased </label> <input type="text" name="date" value="2024-04-20">
+                <label> Total Cost </label> <input type="text" name="cost" value="464">
+                <label> Traveler Id </label> <input type="text" name="tid" value="1">
+                <label> Agent Id </label> <input type="number" name="aid" value="2">
+          </fieldset>
+              <div class="buttonDivs">
+                <input class="affirmButton" type="submit" id="UpdateSaveTravelPackage" value="Update Travel Package">
+                <input class="cancel" type="button" value="Cancel" onClick="browseTravelPackages()">
+              </div>
+        </form> 
+    </div>
+  
+  
+    <div id="delete" style="display: block">
+      <form method="POST" id="deleteTravelPackage">
+          <legend><strong>Delete Travel Package</strong></legend>
+              <fieldset class="fields">
+              <p>Are you sure you wish to delete the following?</p>
+              <input type="hidden" name="travelPackageID" id="deletetravelPackageID" value="1">
+              <label><strong>ID:</strong></label> 1
+                <label> <strong>Date:</strong> </label> 2024-04-20
+                <label> <strong>Cost:</strong> </label> 464
+                
+        </fieldset>
+          <div class="buttonDivs">
+            <input class="affirmButton" type="submit" id="DeleteTravelPackage" value="Delete Travel Package">
+            <input class="cancel" type="button" value="Cancel" onClick="browseTravelPackages()">
+          </div>
+        </form> 
     </div>
 
           

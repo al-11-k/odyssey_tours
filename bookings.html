@@ -5,6 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookings</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <script>
+        function showform(dowhat) {
+              /*
+              * four DIVS: browse, insert, update, delete
+              * this function sets one visible the others not
+              */
+              if (dowhat == 'insert'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'block';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'none';
+              }
+              else if (dowhat == 'update'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'block';
+                  document.getElementById('delete').style.display = 'none';
+              }
+              else if (dowhat == 'delete'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'block';
+              }
+        else if (dowhat == 'all'){
+                  document.getElementById('browse').style.display = 'block';
+                  document.getElementById('insert').style.display = 'block';
+                  document.getElementById('update').style.display = 'block';
+                  document.getElementById('delete').style.display = 'block';
+              }
+              else { //by default display browse
+                  document.getElementById('browse').style.display = 'block';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'none';
+              }
+          }
+  
+        function newBooking() { showform('insert'); }
+        function updateBooking(pid) { showform('update'); }
+        function deleteBooking(pid) { showform ('delete'); }
+        function browseBookings() { showform ('browse'); }
+        function showAll() { showform ('all'); }
+      </script>
 </head>
 <body>
     <h1>Bookings</h1>
@@ -32,6 +76,130 @@
         <button>
             <a href="item_types.html">Item Types</a>
         </button>
+    </div>
+    <div id="browse">
+        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+        <table border="1" cellpadding="5">
+            <tr>
+              <th><a href="#" onClick="newBooking()" style="color:#FF88AA">New</a></th>
+              <th></th>
+              <th>booking_id</th>
+              <th>item_id</th>
+              <th>item_cost</th>
+              <th>quantity</th>
+              <th>sub_total</th>
+              <th>package_id</th>
+            </tr>
+            <tr>
+              <td><a href="#" onClick="updateBooking('this.personID')" style="color:#924FF1">Edit</a></td>
+              <td><a href="#" onclick="deleteBooking('this.personID')" style="color:#FFD3CF">Delete</a></td>
+              <td align="right" >1</td>
+              <td align="right" >1</td>
+              <td align="right">232</td>
+              <td align="right" >2</td>
+              <td align="right">464</td>
+              <td align="right">1</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateBooking('this.personID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteBooking('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td align="right" >2</td>
+                <td align="right" >2</td>
+                <td align="right">2340.29</td>
+                <td align="right" >2</td>
+                <td align="right">4680.58</td>
+                <td align="right">2</td>
+              </tr>
+              <tr>
+                <td><a href="#" onClick="updateBooking('this.personID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteBooking('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td align="right" >3</td>
+                <td align="right" >3</td>
+                <td align="right">1800</td>
+                <td align="right" >2</td>
+                <td align="right">3600</td>
+                <td align="right">2</td>
+              </tr>
+              <tr>
+                <td><a href="#" onClick="updateBooking('this.personID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteBooking('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td align="right" >4</td>
+                <td align="right" >1</td>
+                <td align="right">232</td>
+                <td align="right" >1</td>
+                <td align="right">232</td>
+                <td align="right">3</td>
+              </tr>
+              <tr>
+                <td><a href="#" onClick="updateBooking('this.personID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteBooking('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td align="right" >5</td>
+                <td align="right" >4</td>
+                <td align="right">280</td>
+                <td align="right" >1</td>
+                <td align="right">280</td>
+                <td align="right">4</td>
+              </tr>
+          </table>
+        </div>
+      
+  
+  
+        <div id="insert">
+          <form method="POST" id="addBooking">
+              <legend><strong>Add Booking</strong></legend>
+                <fieldset class="fields">
+                    <!--so i didn't have the total clients and total sales here because
+                    i think that is something we automatically want calculated. So it would just
+                    initialize to 0-->
+                  <label> Date Purchased </label> <input type="text" name="date">
+                  <label> Total Cost </label> <input type="text" name="cost">
+              </fieldset>
+                <div class="buttonDivs">
+                  <input class="affirmButton" type="submit" id="addBooking" value="Add Booking">
+                  <input class="cancel" type="button" value="Cancel" onClick="browseBookings()">
+                </div>
+          </form> 
+      </div>
+  
+  
+      <div id="update">
+        <form method="POST" id="UpdateBooking">
+            <legend><strong>Update Booking</strong></legend>
+              <fieldset class="fields">
+              <input type="hidden" name="browseBookings" id="updateBookingID" value="1">
+              <label> ID: </label> 1
+              <!--i did put to option to edit the sales and client count here
+                in case there was an error that needed to be fixed manually or something-->
+                <label> Date Purchased </label> <input type="text" name="date" value="2024-04-20">
+                <label> Total Cost </label> <input type="text" name="cost" value="464">
+                <label> Traveler Id </label> <input type="text" name="tid" value="1">
+                <label> Agent Id </label> <input type="number" name="aid" value="2">
+          </fieldset>
+              <div class="buttonDivs">
+                <input class="affirmButton" type="submit" id="UpdateSaveBooking" value="Update Booking">
+                <input class="cancel" type="button" value="Cancel" onClick="browseBookings()">
+              </div>
+        </form> 
+    </div>
+  
+  
+    <div id="delete" style="display: block">
+      <form method="POST" id="deleteBooking">
+          <legend><strong>Delete Booking</strong></legend>
+              <fieldset class="fields">
+              <p>Are you sure you wish to delete the following?</p>
+              <input type="hidden" name="BookingID" id="deleteBookingID" value="1">
+              <label><strong>ID:</strong></label> 1
+                <label> <strong>Date:</strong> </label> 2024-04-20
+                <label> <strong>Cost:</strong> </label> 464
+                
+        </fieldset>
+          <div class="buttonDivs">
+            <input class="affirmButton" type="submit" id="DeleteBooking" value="Delete Booking">
+            <input class="cancel" type="button" value="Cancel" onClick="browseBookings()">
+          </div>
+        </form> 
     </div>
 
           

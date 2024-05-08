@@ -5,6 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Item Types</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <script>
+        function showform(dowhat) {
+              /*
+              * four DIVS: browse, insert, update, delete
+              * this function sets one visible the others not
+              */
+              if (dowhat == 'insert'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'block';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'none';
+              }
+              else if (dowhat == 'update'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'block';
+                  document.getElementById('delete').style.display = 'none';
+              }
+              else if (dowhat == 'delete'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'block';
+              }
+        else if (dowhat == 'all'){
+                  document.getElementById('browse').style.display = 'block';
+                  document.getElementById('insert').style.display = 'block';
+                  document.getElementById('update').style.display = 'block';
+                  document.getElementById('delete').style.display = 'block';
+              }
+              else { //by default display browse
+                  document.getElementById('browse').style.display = 'block';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'none';
+              }
+          }
+  
+        function newItemType() { showform('insert'); }
+        function updateItemType(pid) { showform('update'); }
+        function deleteItemType(pid) { showform ('delete'); }
+        function browseItemTypes() { showform ('browse'); }
+        function showAll() { showform ('all'); }
+      </script>
 </head>
 <body>
     <h1>Item Types</h1>
@@ -32,6 +76,90 @@
         <button>
             <a href="item_types.html">Item Types</a>
         </button>
+    </div>
+    <div id="browse">
+        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+        <table border="1" cellpadding="5">
+            <tr>
+              <th><a href="#" onClick="newItemType()" style="color:#FF88AA">New</a></th>
+              <th></th>
+              <th>item_type_id</th>
+              <th>description</th>
+            </tr>
+            <tr>
+              <td><a href="#" onClick="updateItemType('this.personID')" style="color:#924FF1">Edit</a></td>
+              <td><a href="#" onclick="deleteItemType('this.personID')" style="color:#FFD3CF">Delete</a></td>
+              <td align="right" >1</td>
+              <td align="right" >Guided Activity</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateItemType('this.personID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteItemType('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td align="right" >2</td>
+                <td align="right" >Hotel Reservation</td>
+              </tr>
+              <tr>
+                <td><a href="#" onClick="updateItemType('this.personID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteItemType('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td align="right" >3</td>
+                <td align="right" >Flight</td>
+              </tr>
+          </table>
+        </div>
+      
+  
+  
+        <div id="insert">
+          <form method="POST" id="addItemType">
+              <legend><strong>Add Item Type</strong></legend>
+                <fieldset class="fields">
+                    <!--so i didn't have the total clients and total sales here because
+                    i think that is something we automatically want calculated. So it would just
+                    initialize to 0-->
+                  <label> Item Type </label> <input type="text" name="int">
+                  <label> Description </label> <input type="text" name="descr">
+              </fieldset>
+                <div class="buttonDivs">
+                  <input class="affirmButton" type="submit" id="addItemType" value="Add Item Type">
+                  <input class="cancel" type="button" value="Cancel" onClick="browseItemTypes()">
+                </div>
+          </form> 
+      </div>
+  
+  
+      <div id="update">
+        <form method="POST" id="UpdateItemType">
+            <legend><strong>Update Item Type</strong></legend>
+              <fieldset class="fields">
+              <input type="hidden" name="browseItemTypes" id="updateItemTypeID" value="1">
+              <label> ID: </label> 1
+              <!--i did put to option to edit the sales and client count here
+                in case there was an error that needed to be fixed manually or something-->
+                <label> Description </label> <input type="text" name="descr" value="Guided Activity">
+          </fieldset>
+              <div class="buttonDivs">
+                <input class="affirmButton" type="submit" id="UpdateSaveItemType" value="Update Item Type">
+                <input class="cancel" type="button" value="Cancel" onClick="browseItemTypes()">
+              </div>
+        </form> 
+    </div>
+  
+  
+    <div id="delete" style="display: block">
+      <form method="POST" id="deleteItemType">
+          <legend><strong>Delete Item Type</strong></legend>
+              <fieldset class="fields">
+              <p>Are you sure you wish to delete the following?</p>
+              <input type="hidden" name="ItemTypeID" id="deleteItemTypeID" value="1">
+              <label><strong>ID:</strong></label> 1
+                <label> <strong>Description:</strong> </label> Guided Activity
+                
+        </fieldset>
+          <div class="buttonDivs">
+            <input class="affirmButton" type="submit" id="DeleteItemType" value="Delete Item Type">
+            <input class="cancel" type="button" value="Cancel" onClick="browseItemTypes()">
+          </div>
+        </form> 
     </div>
 
           
