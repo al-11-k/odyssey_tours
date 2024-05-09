@@ -122,3 +122,10 @@ label{
     margin-left: 12px;
 }
 
+select {
+    padding: 12px 20px;
+    margin: 8px 17px 8px 0;
+    box-sizing: border-box;
+    border-radius: 6px;
+}
+

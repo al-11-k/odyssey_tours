@@ -134,11 +134,10 @@
           <form method="POST" id="addTravelPackage">
               <legend><strong>Add Travel Package</strong></legend>
                 <fieldset class="fields">
-                    <!--so i didn't have the total clients and total sales here because
-                    i think that is something we automatically want calculated. So it would just
-                    initialize to 0-->
                   <label> Date Purchased </label> <input type="text" name="date">
                   <label> Total Cost </label> <input type="text" name="cost">
+                  <label> Traveler Id </label> <input type="text" name="tid">
+                  <label> Agent Id </label> <input type="number" name="aid">
               </fieldset>
                 <div class="buttonDivs">
                   <input class="affirmButton" type="submit" id="addTravelPackage" value="Add Travel Package">
@@ -154,8 +153,6 @@
               <fieldset class="fields">
               <input type="hidden" name="browseTravelPackages" id="updateTravelPackageID" value="1">
               <label> ID: </label> 1
-              <!--i did put to option to edit the sales and client count here
-                in case there was an error that needed to be fixed manually or something-->
                 <label> Date Purchased </label> <input type="text" name="date" value="2024-04-20">
                 <label> Total Cost </label> <input type="text" name="cost" value="464">
                 <label> Traveler Id </label> <input type="text" name="tid" value="1">

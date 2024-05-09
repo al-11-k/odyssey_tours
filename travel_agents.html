@@ -88,8 +88,6 @@
               <th>first_name</th>
               <th>last_name</th>
               <th>email</th>
-              <th>total_sales</th>
-              <th>total_clients</th>
             </tr>
             <tr>
               <td><a href="#" onClick="updateTravelAgent('this.personID')" style="color:#924FF1">Edit</a></td>
@@ -98,8 +96,6 @@
               <td >Chris</td>
               <td align="right" >Spreadsheet</td>
               <td>csheet@gmail.com</td>
-              <td>30</td>
-              <td>32</td>
             </tr>
             <tr>
                 <td><a href="#" onClick="updateTravelAgent('this.personID')" style="color:#924FF1">Edit</a></td>
@@ -108,8 +104,6 @@
                 <td >Delores</td>
                 <td align="right" >Umbridge</td>
                 <td>dubridge@gmail.com</td>
-                <td>2</td>
-                <td>2</td>
               </tr>
               <tr>
                 <td><a href="#" onClick="updateTravelAgent('this.personID')" style="color:#924FF1">Edit</a></td>
@@ -118,8 +112,6 @@
                 <td >Satoru</td>
                 <td align="right" >Gojo</td>
                 <td>gojo@gmail.com</td>
-                <td>1000</td>
-                <td>1000</td>
               </tr>
               <tr>
                 <td><a href="#" onClick="updateTravelAgent('this.personID')" style="color:#924FF1">Edit</a></td>
@@ -128,8 +120,6 @@
                 <td >Some</td>
                 <td align="right" >Guy</td>
                 <td>someg@gmail.com</td>
-                <td>100</td>
-                <td>90</td>
               </tr>
           </table>
         </div>
@@ -140,9 +130,6 @@
           <form method="POST" id="addTravelAgent">
               <legend><strong>Add Travel Agent</strong></legend>
                 <fieldset class="fields">
-                    <!--so i didn't have the total clients and total sales here because
-                    i think that is something we automatically want calculated. So it would just
-                    initialize to 0-->
                   <label> First Name </label> <input type="text" name="fname">
                   <label> Last Name </label> <input type="text" name="lname">
                   <label> Email </label> <input type="text" name="email">
@@ -161,13 +148,9 @@
               <fieldset class="fields">
               <input type="hidden" name="browseTravelAgents" id="updateTravelAgentID" value="1">
               <label> ID: </label> 1
-              <!--i did put to option to edit the sales and client count here
-                in case there was an error that needed to be fixed manually or something-->
                 <label> First Name </label> <input type="text" name="fname" value="Chris">
                 <label> Last Name </label> <input type="text" name="lname" value="Spreadsheet">
                 <label> Email </label> <input type="text" name="email" value="csheet@gmail.com">
-                <label> Total Sales </label> <input type="number" name="total_sales" value="30">
-                <label> Total Clients </label> <input type="number" name="total_clients" value="32">
           </fieldset>
               <div class="buttonDivs">
                 <input class="affirmButton" type="submit" id="UpdateSaveTravelAgent" value="Update Travel Agent">

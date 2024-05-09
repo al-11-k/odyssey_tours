@@ -93,7 +93,7 @@
               <td><a href="#" onclick="deleteItem('this.itemID')" style="color:#FFD3CF">Delete</a></td>
               <td align="right" >1</td>
               <td align="right" >232</td>
-              <td align="right" >1</td>
+              <td align="right" >Guided Activity</td>
               <td align="right" >NYC Walking Tour</td>
             </tr>
             <tr>
@@ -101,7 +101,7 @@
                 <td><a href="#" onclick="deleteItem('this.itemID')" style="color:#FFD3CF">Delete</a></td>
                 <td align="right" >2</td>
                 <td align="right" >2340.29</td>
-                <td align="right" >2</td>
+                <td align="right" >Hotel Reservation</td>
                 <td align="right" >Paris Hotel Reservation</td>
               </tr>
               <tr>
@@ -109,7 +109,7 @@
                 <td><a href="#" onclick="deleteItem('this.itemID')" style="color:#FFD3CF">Delete</a></td>
                 <td align="right" >3</td>
                 <td align="right" >1800</td>
-                <td align="right" >3</td>
+                <td align="right" >Flight</td>
                 <td align="right" >Round-Trip Flight from GEG to CDG</td>
               </tr>
               <tr>
@@ -117,7 +117,7 @@
                 <td><a href="#" onclick="deleteItem('this.itemID')" style="color:#FFD3CF">Delete</a></td>
                 <td align="right" >4</td>
                 <td align="right" >300</td>
-                <td align="right" >3</td>
+                <td align="right" >Flight</td>
                 <td align="right" >Round-Trip Flight from GEG to SEA</td>
               </tr>
           </table>
@@ -130,6 +130,12 @@
               <legend><strong>Add Item</strong></legend>
                 <fieldset class="fields">
                   <label> Cost </label> <input type="text" name="cost">
+                  <label> Item Type </label> <select name="item_type">
+                    <option value="0">&nbsp;</option>
+                      <option value="1" selected>Guided Activity</option>
+                      <option value="2">Hotel Reservation</option>
+                      <option value="3">Flight</option>
+                      </select>
                   <label> Description </label> <input type="text" name="descr">
               </fieldset>
                 <div class="buttonDivs">
@@ -148,7 +154,12 @@
               <label> ID: </label> 1
               <!--We likely shouldn't need the item type? Or how should we handle this one since it's from elewhere?-->
                 <label> Cost </label> <input type="text" name="cost" value="232">
-                <label> Item Type </label> <input type="text" name="itype" value="1">
+                <label> Item Type </label> <select name="item_type">
+                  <option value="0">&nbsp;</option>
+                    <option value="1" selected>Guided Activity</option>
+                    <option value="2">Hotel Reservation</option>
+                    <option value="3">Flight</option>
+                    </select>
                 <label> Description </label> <input type="text" name="descr" value="NYC Walking Tour">
           </fieldset>
               <div class="buttonDivs">
