@@ -89,32 +89,32 @@
               <th>description</th>
             </tr>
             <tr>
-              <td><a href="#" onClick="updateItem('this.personID')" style="color:#924FF1">Edit</a></td>
-              <td><a href="#" onclick="deleteItem('this.personID')" style="color:#FFD3CF">Delete</a></td>
+              <td><a href="#" onClick="updateItem('this.itemID')" style="color:#924FF1">Edit</a></td>
+              <td><a href="#" onclick="deleteItem('this.itemID')" style="color:#FFD3CF">Delete</a></td>
               <td align="right" >1</td>
               <td align="right" >232</td>
               <td align="right" >1</td>
               <td align="right" >NYC Walking Tour</td>
             </tr>
             <tr>
-                <td><a href="#" onClick="updateItem('this.personID')" style="color:#924FF1">Edit</a></td>
-                <td><a href="#" onclick="deleteItem('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td><a href="#" onClick="updateItem('this.itemID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteItem('this.itemID')" style="color:#FFD3CF">Delete</a></td>
                 <td align="right" >2</td>
                 <td align="right" >2340.29</td>
                 <td align="right" >2</td>
                 <td align="right" >Paris Hotel Reservation</td>
               </tr>
               <tr>
-                <td><a href="#" onClick="updateItem('this.personID')" style="color:#924FF1">Edit</a></td>
-                <td><a href="#" onclick="deleteItem('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td><a href="#" onClick="updateItem('this.itemID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteItem('this.itemID')" style="color:#FFD3CF">Delete</a></td>
                 <td align="right" >3</td>
                 <td align="right" >1800</td>
                 <td align="right" >3</td>
                 <td align="right" >Round-Trip Flight from GEG to CDG</td>
               </tr>
               <tr>
-                <td><a href="#" onClick="updateItem('this.personID')" style="color:#924FF1">Edit</a></td>
-                <td><a href="#" onclick="deleteItem('this.personID')" style="color:#FFD3CF">Delete</a></td>
+                <td><a href="#" onClick="updateItem('this.itemID')" style="color:#924FF1">Edit</a></td>
+                <td><a href="#" onclick="deleteItem('this.itemID')" style="color:#FFD3CF">Delete</a></td>
                 <td align="right" >4</td>
                 <td align="right" >300</td>
                 <td align="right" >3</td>
@@ -129,11 +129,8 @@
           <form method="POST" id="addItem">
               <legend><strong>Add Item</strong></legend>
                 <fieldset class="fields">
-                    <!--so i didn't have the total clients and total sales here because
-                    i think that is something we automatically want calculated. So it would just
-                    initialize to 0-->
-                  <label> Date Purchased </label> <input type="text" name="date">
-                  <label> Total Cost </label> <input type="text" name="cost">
+                  <label> Cost </label> <input type="text" name="cost">
+                  <label> Description </label> <input type="text" name="descr">
               </fieldset>
                 <div class="buttonDivs">
                   <input class="affirmButton" type="submit" id="addItem" value="Add Item">
@@ -149,8 +146,7 @@
               <fieldset class="fields">
               <input type="hidden" name="browseItems" id="updateItemID" value="1">
               <label> ID: </label> 1
-              <!--i did put to option to edit the sales and client count here
-                in case there was an error that needed to be fixed manually or something-->
+              <!--We likely shouldn't need the item type? Or how should we handle this one since it's from elewhere?-->
                 <label> Cost </label> <input type="text" name="cost" value="232">
                 <label> Item Type </label> <input type="text" name="itype" value="1">
                 <label> Description </label> <input type="text" name="descr" value="NYC Walking Tour">
@@ -170,8 +166,8 @@
               <p>Are you sure you wish to delete the following?</p>
               <input type="hidden" name="ItemID" id="deleteItemID" value="1">
               <label><strong>ID:</strong></label> 1
-                <label> <strong>Date:</strong> </label> 2024-04-20
-                <label> <strong>Cost:</strong> </label> 464
+                <label> <strong>Cost:</strong> </label> 232
+                <label> <strong>Description:</strong> </label> NYC Walking Tour
                 
         </fieldset>
           <div class="buttonDivs">

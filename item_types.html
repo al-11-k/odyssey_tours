@@ -113,9 +113,7 @@
           <form method="POST" id="addItemType">
               <legend><strong>Add Item Type</strong></legend>
                 <fieldset class="fields">
-                    <!--so i didn't have the total clients and total sales here because
-                    i think that is something we automatically want calculated. So it would just
-                    initialize to 0-->
+                    <!--I think to do the drop down table then we should define how many types of items we will have, right?-->
                   <label> Item Type </label> <input type="text" name="int">
                   <label> Description </label> <input type="text" name="descr">
               </fieldset>
@@ -133,8 +131,6 @@
               <fieldset class="fields">
               <input type="hidden" name="browseItemTypes" id="updateItemTypeID" value="1">
               <label> ID: </label> 1
-              <!--i did put to option to edit the sales and client count here
-                in case there was an error that needed to be fixed manually or something-->
                 <label> Description </label> <input type="text" name="descr" value="Guided Activity">
           </fieldset>
               <div class="buttonDivs">
