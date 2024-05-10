@@ -73,20 +73,20 @@ VALUES (
     :input_package_id
 );
 
--- Delete (again unsure just based it off the example)
+-- Delete
 
 DELETE FROM Bookings WHERE item_id = :item_id_entry_selected_from_list AND  package_id = package_id_entry_selected_from_list;
 
--- Update (still need to do this but i got tired lol)
+-- Update
 
-
+UPDATE Bookings SET item_cost = :costInput, quantity = :quantityInput WHERE item_id = :item_id_entry_selected_from_list AND  package_id = package_id_entry_selected_from_list;
 
 
 
 --------------------------------------------------------
 -- Items
 
--- Select (i think i did this right?? m)
+-- Select
 
 SELECT Items.item_id, cost, Item_Types.description, description AS item_type
 FROM Items INNER JOIN Item_Types ON item_type = Item_Types.item_type
