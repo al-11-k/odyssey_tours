@@ -75,8 +75,8 @@ INSERT INTO Travel_Packages (date_purchaed, total_cost, traveler_id, agent_id)
 VALUES (
     :input_date_purchased,
     :input_total_cost,
-    :input_traveler_id,
-    :input_agent_id
+    :input_traveler_id_selected_dropdown,
+    :input_agent_id_selected_dropdown
 );
 
 
@@ -107,10 +107,10 @@ SELECT item_id, description FROM Items;
 
 INSERT INTO Bookings (item_id, item_cost, quantity, package_id)
 VALUES (
-    :input_item_id,
+    :input_item_id_from_dropdown,
     :input_item_cost,
     :input_quantity,
-    :input_package_id
+    :input_package_id_from_dropdown
 );
 
 -- Delete
