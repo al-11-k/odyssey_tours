@@ -40,7 +40,9 @@ CREATE TABLE Travelers (
   first_name varchar(255) NOT NULL,
   last_name varchar(255) NOT NULL,
   email varchar(255) NOT NULL,
-  phone_number varchar(255) NOT NULL
+  phone_number varchar(255) NOT NULL,
+  PRIMARY KEY (traveler_id),
+  UNIQUE KEY `name` (first_name, last_name)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 --
@@ -64,7 +66,9 @@ CREATE TABLE Travel_Agents (
     agent_id int(11) NOT NULL,
     first_name varchar(255) NOT NULL,
     last_name varchar(255) NOT NULL,
-    email varchar(255) NOT NULL
+    email varchar(255) NOT NULL,
+    PRIMARY KEY (agent_id),
+    UNIQUE KEY `name` (first_name, last_name)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
@@ -89,7 +93,10 @@ CREATE TABLE Travel_Packages (
   date date NOT NULL,
   total_cost decimal(6,2) NOT NULL,
   traveler_id int NOT NULL,
-  agent_id int NOT NULL
+  agent_id int,
+  PRIMARY KEY (package_id),
+  FOREIGN KEY (traveler_id) REFERENCES Travelers(traveler_id) ON DELETE CASCADE,
+  FOREIGN KEY (agent_id) REFERENCES Travel_Agents(agent_id) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
@@ -110,7 +117,9 @@ INSERT INTO Travel_Packages VALUES
 
 CREATE TABLE Item_Types (
   item_type int(11) NOT NULL,
-  description varchar(255) NOT NULL
+  description varchar(255) NOT NULL,
+  PRIMARY KEY (item_type),
+  UNIQUE KEY `item` (item_type)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
@@ -133,7 +142,10 @@ CREATE TABLE Items (
   item_id int(11) NOT NULL,
   description varchar(255) NOT NULL,
   cost decimal(6,2) NOT NULL,
-  item_type int NOT NULL
+  item_type int NOT NULL,
+  PRIMARY KEY (item_id),
+  FOREIGN KEY (item_type) REFERENCES Item_Types(item_type) ON DELETE CASCADE,
+  UNIQUE KEY `item_id` (item_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
@@ -158,7 +170,11 @@ CREATE TABLE Bookings (
   item_cost decimal(6,2) NOT NULL,
   subtotal decimal(6,2) NOT NULL,
   package_id int NOT NULL,
-  item_id int NOT NULL
+  item_id int NOT NULL,
+  PRIMARY KEY (booking_id),
+  FOREIGN KEY (package_id) REFERENCES Travel_Packages(package_id) ON DELETE CASCADE,
+  FOREIGN KEY (item_id) REFERENCES Items(item_id) ON DELETE CASCADE,
+  UNIQUE KEY `booking` (booking_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -176,127 +192,8 @@ INSERT INTO Bookings VALUES
 -- --------------------------------------------------------
 
 
-
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `Travelers`
---
-ALTER TABLE `Travelers`
-  ADD PRIMARY KEY (`traveler_id`);
-
---
--- Indexes for table `Travel_Agents`
---
-ALTER TABLE `Travel_Agents`
-  ADD PRIMARY KEY (`agent_id`);
-
---
--- Indexes for table `Travel_Packages`
---
-ALTER TABLE `Travel_Packages`
-  ADD PRIMARY KEY (`package_id`),
-  ADD KEY `fk_packages_to_travelers` (`traveler_id`),
-  ADD KEY `fk_packages_to_agents` (`agent_id`);
-
---
--- Indexes for table `Item_Types`
---
-ALTER TABLE `Item_Types`
-  ADD PRIMARY KEY (`item_type`);
-
---
--- Indexes for table `Items`
---
-ALTER TABLE `Items`
-  ADD PRIMARY KEY (`item_id`),
-  ADD KEY `fk_item_to_item_type` (`item_type`);
-
---
--- Indexes for table `Bookings`
---
-ALTER TABLE `Bookings`
-  ADD PRIMARY KEY (`booking_id`),
-  ADD KEY `fk_booking_to_package` (`package_id`),
-  ADD KEY `fk_booking_to_item` (`item_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `Travelers`
---
-ALTER TABLE `Travelers`
-  MODIFY `traveler_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `Travel_Agents`
---
-ALTER TABLE `Travel_Agents`
-  MODIFY `agent_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `Travel_Packages`
---
-ALTER TABLE `Travel_Packages`
-  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `Item_Types`
---
-ALTER TABLE `Item_Types`
-  MODIFY `item_type` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `Items`
---
-ALTER TABLE `Items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `Bookings`
---
-ALTER TABLE `Bookings`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `Travel_Packages`
---
-ALTER TABLE `Travel_Packages`
-  ADD CONSTRAINT `fk_packages_to_travelers` FOREIGN KEY (`traveler_id`) REFERENCES `Travelers` (`traveler_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_packages_to_agents` FOREIGN KEY (`agent_id`) REFERENCES `Travel_Agents` (`agent_id`) ON DELETE CASCADE;
-
-
---
--- Constraints for table `Items`
---
-ALTER TABLE `Items`
-  ADD CONSTRAINT `fk_item_to_item_type`FOREIGN KEY (item_type) REFERENCES Item_Types(item_type) ON DELETE CASCADE;
-
---
--- Constraints for table `Bookings`
---
-ALTER TABLE `Bookings`
-  ADD CONSTRAINT `fk_booking_to_package` FOREIGN KEY (`package_id`) REFERENCES Travel_Packages(package_id) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_booking_to_item` FOREIGN KEY (`item_id`) REFERENCES `Items` (`item_id`) ON DELETE CASCADE;
-COMMIT;
-
-
-
-
-
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 SET FOREIGN_KEY_CHECKS=1;
-COMMIT;
