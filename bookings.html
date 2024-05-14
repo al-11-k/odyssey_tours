@@ -83,12 +83,12 @@
             <tr>
               <th><a href="#" onClick="newBooking()" style="color:#FF88AA">New</a></th>
               <th></th>
-              <th>booking_id</th>
-              <th>item_id</th>
-              <th>item_cost</th>
-              <th>quantity</th>
-              <th>sub_total</th>
-              <th>package_id</th>
+              <th>Booking ID</th>
+              <th>Item ID</th>
+              <th>Item Cost</th>
+              <th>Quantity</th>
+              <th>Sub Total</th>
+              <th>Package ID</th>
             </tr>
             <tr>
               <td><a href="#" onClick="updateBooking('this.personID')" style="color:#924FF1">Edit</a></td>
@@ -152,7 +152,13 @@
                   <label> Item Cost </label> <input type="text" name="date">
                   <label> Quantity </label> <input type="text" name="cost">
                   <label> Package ID </label> <input type="text" name="package_id">
-                  <label> Item Id </label> <input type="text" name="item_id">
+                  <label> Item </label> <select name="item_desc">
+                    <option value="0">&nbsp;</option>
+                      <option value="1" selected>NYC Walking Tour</option>
+                      <option value="2">Paris Hotel Reservation</option>
+                      <option value="3">Round-Trip Flight from GEG to CDG</option>
+                      <option value="4">Round-Trip Flight from GEG to SEA</option>
+                      </select>
               </fieldset>
                 <div class="buttonDivs">
                   <input class="affirmButton" type="submit" id="addBooking" value="Add Booking">
@@ -171,7 +177,13 @@
                 <label> Date Purchased </label> <input type="text" name="date" value="2024-04-20">
                 <label> Total Cost </label> <input type="text" name="cost" value="464">
                 <label> Package ID </label> <input type="text" name="package_id" value="1">
-                <label> Item Id </label> <input type="text" name="item_id" value="2">
+                <label> Item </label> <select name="item_desc">
+                  <option value="0">&nbsp;</option>
+                    <option value="1" selected>NYC Walking Tour</option>
+                    <option value="2">Paris Hotel Reservation</option>
+                    <option value="3">Round-Trip Flight from GEG to CDG</option>
+                    <option value="4">Round-Trip Flight from GEG to SEA</option>
+                    </select>
           </fieldset>
               <div class="buttonDivs">
                 <input class="affirmButton" type="submit" id="UpdateSaveBooking" value="Update Booking">

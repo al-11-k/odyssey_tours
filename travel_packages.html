@@ -51,7 +51,7 @@
       </script>
 </head>
 <body>
-    <h1>Traveler Packages</h1>
+    <h1>Travel Packages</h1>
     <div id="nav_bar">
         <button>
             <a href="travelers.html">Travelers</a>
@@ -83,11 +83,11 @@
             <tr>
               <th><a href="#" onClick="newTravelPackage()" style="color:#FF88AA">New</a></th>
               <th></th>
-              <th>package_id</th>
-              <th>date_purchased</th>
-              <th>total_cost</th>
-              <th>traveler_id</th>
-              <th>agent_id</th>
+              <th>Package ID</th>
+              <th>Date Purchased</th>
+              <th>Total Cost</th>
+              <th>Traveler ID</th>
+              <th>Agent ID</th>
             </tr>
             <tr>
               <td><a href="#" onClick="updateTravelPackage('this.personID')" style="color:#924FF1">Edit</a></td>
@@ -136,8 +136,20 @@
                 <fieldset class="fields">
                   <label> Date Purchased </label> <input type="text" name="date">
                   <label> Total Cost </label> <input type="text" name="cost">
-                  <label> Traveler Id </label> <input type="text" name="tid">
-                  <label> Agent Id </label> <input type="number" name="aid">
+                  <label> Traveler </label> <select name="traveler_name">
+                    <option value="0">&nbsp;</option>
+                      <option value="1" selected>Jan Doe</option>
+                      <option value="2">Joe Brown</option>
+                      <option value="3">Ally Karlis</option>
+                      <option value="4">Brittany Healey</option>
+                      </select>
+                  <label> Travel Agent </label> <select name="agent_name">
+                    <option value="0">&nbsp;</option>
+                      <option value="1" selected>Chris Spreadsheet</option>
+                      <option value="2">Delores Umbridge</option>
+                      <option value="3">Satoru Gojo</option>
+                      <option value="4">Some Guy</option>
+                      </select>
               </fieldset>
                 <div class="buttonDivs">
                   <input class="affirmButton" type="submit" id="addTravelPackage" value="Add Travel Package">
@@ -155,8 +167,20 @@
               <label> ID: </label> 1
                 <label> Date Purchased </label> <input type="text" name="date" value="2024-04-20">
                 <label> Total Cost </label> <input type="text" name="cost" value="464">
-                <label> Traveler Id </label> <input type="text" name="tid" value="1">
-                <label> Agent Id </label> <input type="number" name="aid" value="2">
+                <label> Traveler </label> <select name="traveler_name">
+                  <option value="0">&nbsp;</option>
+                    <option value="1" selected>Jan Doe</option>
+                    <option value="2">Joe Brown</option>
+                    <option value="3">Ally Karlis</option>
+                    <option value="4">Brittany Healey</option>
+                    </select>
+                <label> Travel Agent </label> <select name="agent_name">
+                  <option value="0">&nbsp;</option>
+                    <option value="1" selected>Chris Spreadsheet</option>
+                    <option value="2">Delores Umbridge</option>
+                    <option value="3">Satoru Gojo</option>
+                    <option value="4">Some Guy</option>
+                    </select>
           </fieldset>
               <div class="buttonDivs">
                 <input class="affirmButton" type="submit" id="UpdateSaveTravelPackage" value="Update Travel Package">

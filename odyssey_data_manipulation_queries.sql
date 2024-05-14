@@ -5,7 +5,12 @@
 
 -- Select
 
-SELECT traveler_id, first_name, last_name, email, phone_number FROM Travelers;
+SELECT traveler_id AS Traveler ID,
+    first_name AS First Name, 
+    last_name AS Last Name, 
+    email AS Email, 
+    phone_number AS Phone Number
+FROM Travelers;
 
 -- Insert
 
@@ -24,7 +29,12 @@ VALUES (
 
 -- Select
 
-SELECT agent_id, first_name, last_name, email, phone_number FROM Travel_Agents;
+SELECT agent_id AS Agent ID,
+    first_name AS First Name, 
+    last_name AS Last Name,
+    email AS Email, 
+    phone_number AS Phone Number 
+FROM Travel_Agents;
 
 -- Insert
 
@@ -42,7 +52,22 @@ VALUES (
 
 -- Select
 
-SELECT date_purchaed, total_cost, traveler_id, agent_id FROM Travel_Packages;
+SELECT date_purchaed AS Date Purchased,
+    total_cost AS Total Cost,
+    traveler_id AS Traveler ID, 
+    agent_id AS Agent ID
+FROM Travel_Packages;
+
+
+-- Select to populate the Agent dropdown search
+
+SELECT agent_id, first_name, last_name FROM Travel_Agents;
+
+
+-- Select to populate the Traveler dropdown search
+
+SELECT traveler_id, first_name, last_name FROM Travelers;
+
 
 -- Insert
 
@@ -61,7 +86,22 @@ VALUES (
 
 -- Select
 
-SELECT item_id, item_cost, quantity, package_id FROM Bookings;
+SELECT booking_id AS Booking ID,
+    item_id AS Item ID, 
+    item_cost AS Item Cost, 
+    quantity AS Quantity, 
+    package_id AS Package ID
+FROM Bookings;
+
+-- Select to populate the Travel Packages dropdown search
+
+--??????
+
+
+-- Select to populate the Items dropdown search
+
+SELECT item_id, description FROM Items;
+
 
 -- Insert
 
@@ -110,7 +150,9 @@ VALUES (
 
 -- Select
 
-SELECT item_type, description FROM Item_Types;
+SELECT item_type As Item Type,
+    description AS description
+FROM Item_Types;
 
 -- Insert
 
