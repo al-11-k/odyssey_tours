@@ -59,14 +59,14 @@ SELECT date_purchaed AS Date Purchased,
 FROM Travel_Packages;
 
 
--- Select to populate the Agent dropdown search
+-- Select to populate the Agent dropdown search and sort them alphabetically
 
-SELECT agent_id, first_name, last_name FROM Travel_Agents;
+SELECT agent_id, first_name, last_name FROM Travel_Agents ORDER BY last_name ASC;
 
 
--- Select to populate the Traveler dropdown search
+-- Select to populate the Traveler dropdown search and sort them alphabetically
 
-SELECT traveler_id, first_name, last_name FROM Travelers;
+SELECT traveler_id, first_name, last_name FROM Travelers ORDER BY last_name ASC;
 
 
 -- Insert
