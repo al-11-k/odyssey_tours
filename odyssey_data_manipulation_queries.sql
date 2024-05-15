@@ -54,6 +54,7 @@ VALUES (
 
 SELECT date_purchaed AS Date Purchased,
     total_cost AS Total Cost,
+    description AS Description,
     traveler_id AS Traveler ID, 
     agent_id AS Agent ID
 FROM Travel_Packages;
@@ -75,6 +76,7 @@ INSERT INTO Travel_Packages (date_purchaed, total_cost, traveler_id, agent_id)
 VALUES (
     :input_date_purchased,
     :input_total_cost,
+    :input_description,
     :input_traveler_id_selected_dropdown,
     :input_agent_id_selected_dropdown
 );
@@ -95,7 +97,7 @@ FROM Bookings;
 
 -- Select to populate the Travel Packages dropdown search
 
---??????
+SELECT package_id, description FROM Travel_Packages;
 
 
 -- Select to populate the Items dropdown search

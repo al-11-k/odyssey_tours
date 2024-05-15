@@ -86,6 +86,7 @@
               <th>Package ID</th>
               <th>Date Purchased</th>
               <th>Total Cost</th>
+              <th>Description</th>
               <th>Traveler ID</th>
               <th>Agent ID</th>
             </tr>
@@ -95,6 +96,7 @@
               <td align="right" >1</td>
               <td >2024-04-20</td>
               <td align="right" >464</td>
+              <td align="right" >NYC Day Tour</td>
               <td>1</td>
               <td>2</td>
             </tr>
@@ -104,6 +106,7 @@
                 <td align="right" >2</td>
                 <td >2024-04-10</td>
                 <td align="right" >8280.58</td>
+                <td align="right" >France Tour Package</td>
                 <td>2</td>
                 <td>3</td>
               </tr>
@@ -113,6 +116,7 @@
                 <td align="right" >3</td>
                 <td >2024-04-01</td>
                 <td align="right" >232</td>
+                <td align="right" >NYC Day Tour</td>
                 <td>4</td>
                 <td>3</td>
               </tr>
@@ -122,6 +126,7 @@
                 <td align="right" >4</td>
                 <td >2024-03-29</td>
                 <td align="right" >280</td>
+                <td align="right" >Seattle Flight</td>
                 <td>3</td>
                 <td>4</td>
               </tr>
@@ -136,6 +141,12 @@
                 <fieldset class="fields">
                   <label> Date Purchased </label> <input type="text" name="date">
                   <label> Total Cost </label> <input type="text" name="cost">
+                  <label> Description </label> <select name="traveler_name">
+                    <option value="0">&nbsp;</option>
+                      <option value="1" selected>NYC Day Tour</option>
+                      <option value="2">France Tour Package</option>
+                      <option value="3">Seattle Flight</option>
+                      </select>
                   <label> Traveler </label> <select name="traveler_name">
                     <option value="0">&nbsp;</option>
                       <option value="1" selected>Jan Doe</option>
@@ -167,6 +178,12 @@
               <label> ID: </label> 1
                 <label> Date Purchased </label> <input type="text" name="date" value="2024-04-20">
                 <label> Total Cost </label> <input type="text" name="cost" value="464">
+                <label> Description </label> <select name="traveler_name">
+                  <option value="0">&nbsp;</option>
+                    <option value="1" selected>NYC Day Tour</option>
+                    <option value="2">France Tour Package</option>
+                    <option value="3">Seattle Flight</option>
+                    </select>
                 <label> Traveler </label> <select name="traveler_name">
                   <option value="0">&nbsp;</option>
                     <option value="1" selected>Jan Doe</option>
@@ -199,6 +216,7 @@
               <label><strong>ID:</strong></label> 1
                 <label> <strong>Date:</strong> </label> 2024-04-20
                 <label> <strong>Cost:</strong> </label> 464
+                <label> <strong>Description:</strong> </label> NYC Day Tour
                 
         </fieldset>
           <div class="buttonDivs">

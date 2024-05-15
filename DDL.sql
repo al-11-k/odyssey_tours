@@ -92,6 +92,7 @@ CREATE TABLE Travel_Packages (
   package_id int(11) NOT NULL,
   date date NOT NULL,
   total_cost decimal(6,2) NOT NULL,
+  description varchar(255),
   traveler_id int NOT NULL,
   agent_id int,
   PRIMARY KEY (package_id),
@@ -104,10 +105,10 @@ CREATE TABLE Travel_Packages (
 --
 
 INSERT INTO Travel_Packages VALUES
-(1, '2024-04-20', 464, (SELECT traveler_id from Travelers where traveler_id = 1), (SELECT agent_id from Travel_Agents where agent_id = 2)),
-(2, '2024-04-10', 8280.58, (SELECT traveler_id from Travelers where traveler_id = 2), (SELECT agent_id from Travel_Agents where agent_id = 3)),
-(3, '2024-04-01', 232, (SELECT traveler_id from Travelers where traveler_id = 4), (SELECT agent_id from Travel_Agents where agent_id = 3)),
-(4, '2024-03-29', 280, (SELECT traveler_id from Travelers where traveler_id = 3), (SELECT agent_id from Travel_Agents where agent_id = 4));
+(1, '2024-04-20', 464, 'NYC Day Tour', (SELECT traveler_id from Travelers where traveler_id = 1), (SELECT agent_id from Travel_Agents where agent_id = 2)),
+(2, '2024-04-10', 8280.58, 'France Tour Package', (SELECT traveler_id from Travelers where traveler_id = 2), (SELECT agent_id from Travel_Agents where agent_id = 3)),
+(3, '2024-04-01', 232, 'NYC Day Tour', (SELECT traveler_id from Travelers where traveler_id = 4), (SELECT agent_id from Travel_Agents where agent_id = 3)),
+(4, '2024-03-29', 280, 'Seattle Flight', (SELECT traveler_id from Travelers where traveler_id = 3), (SELECT agent_id from Travel_Agents where agent_id = 4));
 
 -- --------------------------------------------------------
 
