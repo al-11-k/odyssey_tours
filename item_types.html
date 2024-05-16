@@ -121,38 +121,6 @@
                 </div>
           </form> 
       </div>
-  
-  
-      <div id="update">
-        <form method="POST" id="UpdateItemType">
-            <legend><strong>Update Item Type</strong></legend>
-              <fieldset class="fields">
-              <input type="hidden" name="browseItemTypes" id="updateItemTypeID" value="1">
-              <label> ID: </label> 1
-                <label> Description </label> <input type="text" name="descr" value="Guided Activity">
-          </fieldset>
-              <div class="buttonDivs">
-                <input class="affirmButton" type="submit" id="UpdateSaveItemType" value="Update Item Type">
-                <input class="cancel" type="button" value="Cancel" onClick="browseItemTypes()">
-              </div>
-        </form> 
-    </div>
-  
-  
-    <div id="delete" style="display: block">
-      <form method="POST" id="deleteItemType">
-          <legend><strong>Delete Item Type</strong></legend>
-              <fieldset class="fields">
-              <p>Are you sure you wish to delete the following?</p>
-              <input type="hidden" name="ItemTypeID" id="deleteItemTypeID" value="1">
-              <label><strong>ID:</strong></label> 1
-                <label> <strong>Description:</strong> </label> Guided Activity
-                
-        </fieldset>
-          <div class="buttonDivs">
-            <input class="affirmButton" type="submit" id="DeleteItemType" value="Delete Item Type">
-            <input class="cancel" type="button" value="Cancel" onClick="browseItemTypes()">
-          </div>
         </form> 
     </div>
 

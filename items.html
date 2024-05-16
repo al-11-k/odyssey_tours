@@ -144,46 +144,6 @@
                 </div>
           </form> 
       </div>
-  
-  
-      <div id="update">
-        <form method="POST" id="UpdateItem">
-            <legend><strong>Update Item</strong></legend>
-              <fieldset class="fields">
-              <input type="hidden" name="browseItems" id="updateItemID" value="1">
-              <label> ID: </label> 1
-                <label> Cost </label> <input type="text" name="cost" value="232">
-                <label> Item Type </label> <select name="item_type">
-                  <option value="0">&nbsp;</option>
-                    <option value="1" selected>Guided Activity</option>
-                    <option value="2">Hotel Reservation</option>
-                    <option value="3">Flight</option>
-                    </select>
-                <label> Description </label> <input type="text" name="descr" value="NYC Walking Tour">
-          </fieldset>
-              <div class="buttonDivs">
-                <input class="affirmButton" type="submit" id="UpdateSaveItem" value="Update Item">
-                <input class="cancel" type="button" value="Cancel" onClick="browseItems()">
-              </div>
-        </form> 
-    </div>
-  
-  
-    <div id="delete" style="display: block">
-      <form method="POST" id="deleteItem">
-          <legend><strong>Delete Item</strong></legend>
-              <fieldset class="fields">
-              <p>Are you sure you wish to delete the following?</p>
-              <input type="hidden" name="ItemID" id="deleteItemID" value="1">
-              <label><strong>ID:</strong></label> 1
-                <label> <strong>Cost:</strong> </label> 232
-                <label> <strong>Description:</strong> </label> NYC Walking Tour
-                
-        </fieldset>
-          <div class="buttonDivs">
-            <input class="affirmButton" type="submit" id="DeleteItem" value="Delete Item">
-            <input class="cancel" type="button" value="Cancel" onClick="browseItems()">
-          </div>
         </form> 
     </div>
 

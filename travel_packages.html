@@ -164,55 +164,6 @@
           </form> 
       </div>
   
-  
-      <div id="update">
-        <form method="POST" id="UpdateTravelPackage">
-            <legend><strong>Update Travel Package</strong></legend>
-              <fieldset class="fields">
-              <input type="hidden" name="browseTravelPackages" id="updateTravelPackageID" value="1">
-              <label> ID: </label> 1
-                <label> Date Purchased </label> <input type="text" name="date" value="2024-04-20">
-                <label> Total Cost </label> <input type="text" name="cost" value="464">
-                <label> Description </label> <input type="text" name="traveler_name">
-                <label> Traveler </label> <select name="traveler_name">
-                  <option value="0">&nbsp;</option>
-                    <option value="1" selected>Jan Doe</option>
-                    <option value="2">Joe Brown</option>
-                    <option value="3">Ally Karlis</option>
-                    <option value="4">Brittany Healey</option>
-                    </select>
-                <label> Travel Agent </label> <select name="agent_name">
-                  <option value="0">&nbsp;</option>
-                    <option value="1" selected>Chris Spreadsheet</option>
-                    <option value="2">Delores Umbridge</option>
-                    <option value="3">Satoru Gojo</option>
-                    <option value="4">Some Guy</option>
-                    </select>
-          </fieldset>
-              <div class="buttonDivs">
-                <input class="affirmButton" type="submit" id="UpdateSaveTravelPackage" value="Update Travel Package">
-                <input class="cancel" type="button" value="Cancel" onClick="browseTravelPackages()">
-              </div>
-        </form> 
-    </div>
-  
-  
-    <div id="delete" style="display: block">
-      <form method="POST" id="deleteTravelPackage">
-          <legend><strong>Delete Travel Package</strong></legend>
-              <fieldset class="fields">
-              <p>Are you sure you wish to delete the following?</p>
-              <input type="hidden" name="travelPackageID" id="deletetravelPackageID" value="1">
-              <label><strong>ID:</strong></label> 1
-                <label> <strong>Date:</strong> </label> 2024-04-20
-                <label> <strong>Cost:</strong> </label> 464
-                <label> <strong>Description:</strong> </label> NYC Day Tour
-                
-        </fieldset>
-          <div class="buttonDivs">
-            <input class="affirmButton" type="submit" id="DeleteTravelPackage" value="Delete Travel Package">
-            <input class="cancel" type="button" value="Cancel" onClick="browseTravelPackages()">
-          </div>
         </form> 
     </div>
 
