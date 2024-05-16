@@ -28,7 +28,6 @@ DROP TABLE IF EXISTS `Travel_Packages`;
 DROP TABLE IF EXISTS `Item_Types`;
 DROP TABLE IF EXISTS `Items`;
 DROP TABLE IF EXISTS `Bookings`;
-
 -- --------------------------------------------------------
 
 --
@@ -184,11 +183,11 @@ CREATE TABLE Bookings (
 --
 
 INSERT INTO Bookings VALUES 
-(1, (SELECT item_id from Items where item_id = 1), 2, 232, 464, (SELECT package_id from Travel_Packages where package_id = 1)),
-(2, (SELECT item_id from Items where item_id = 2), 2, 2340.29, 4680.58, (SELECT package_id from Travel_Packages where package_id = 2)),
-(3, (SELECT item_id from Items where item_id = 3), 2, 1800, 3600, (SELECT package_id from Travel_Packages where package_id = 2)),
-(4, (SELECT item_id from Items where item_id = 1), 1, 232, 232, (SELECT package_id from Travel_Packages where package_id = 3)),
-(5, (SELECT item_id from Items where item_id = 4), 1, 280, 280, (SELECT package_id from Travel_Packages where package_id = 4));
+(1, 2, 232, 464, (SELECT package_id from Travel_Packages where package_id = 1), (SELECT item_id from Items where item_id = 1),),
+(2, 2, 2340.29, 4680.58, (SELECT package_id from Travel_Packages where package_id = 2), (SELECT item_id from Items where item_id = 2)),
+(3, 2, 1800, 3600, (SELECT package_id from Travel_Packages where package_id = 2), (SELECT item_id from Items where item_id = 3)),
+(4, 1, 232, 232,, (SELECT package_id from Travel_Packages where package_id = 3),  (SELECT item_id from Items where item_id = 1)),
+(5, 1, 280, 280, (SELECT package_id from Travel_Packages where package_id = 4), (SELECT item_id from Items where item_id = 4));
 
 -- --------------------------------------------------------
 
