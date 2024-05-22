@@ -9,6 +9,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "express-handlebars": "^7.1.2",
     "mysql": "^2.18.1"
   }
 }
