@@ -15,7 +15,9 @@ var db = require('./database/db-connector')
 // app.js 
 
 app.get('/', function(req, res)
+
     {
+        res.send("yippee")
         // Define our queries
         query1 = 'DROP TABLE IF EXISTS diagnostic;';
         query2 = 'CREATE TABLE diagnostic(id INT PRIMARY KEY AUTO_INCREMENT, text VARCHAR(255) NOT NULL);';
@@ -42,7 +44,7 @@ app.get('/', function(req, res)
                 });
             });
         });
-    });
+    }); 
 
 // app.js
 
