@@ -1,3 +1,9 @@
+// Citation for the following file:
+// Date: 05/22/2024
+// Adapted from nodejs-starter-app on github.com provided to students via Canvas/course materials
+// Code was copied and pasted from the code snippets and changed to fit the database needs for project
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
 // Get the objects we need to modify
 let addTravelerForm = document.getElementById('add-traveler-form-ajax');
 

@@ -1,3 +1,9 @@
+// Citation for the following file:
+// Date: 05/21/2024
+// Adapted from nodejs-starter-app on github.com provided to students via Canvas/course materials
+// Code was copied and pasted from the code snippets and changed to fit the database needs for project
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
 // App.js
 var express = require('express');   // We are using the express library for the web server
 var app     = express();
@@ -100,14 +106,15 @@ app.delete('/delete-traveler-ajax/', function(req,res,next){
   app.put('/put-person-ajax', function(req,res,next){
   let data = req.body;
 
-  let homeworld = parseInt(data.homeworld);
-  let person = parseInt(data.fullname);
+  let fullname = data.fullname;
+  let email = parseInt(data.email);
+  let phone_number = parseInt(data.phone_number)
 
-  let queryUpdateWorld = `UPDATE bsg_people SET homeworld = ? WHERE bsg_people.id = ?`;
-  let selectWorld = `SELECT * FROM bsg_planets WHERE id = ?`
+  let queryUpdateTraveler = `UPDATE Travelers SET fullname = ? WHERE Travelers.id = ?`;
+  let selectTraveler = `SELECT * FROM Travelers WHERE id = ?`
 
         // Run the 1st query
-        db.pool.query(queryUpdateWorld, [homeworld, person], function(error, rows, fields){
+        db.pool.query(queryUpdateTraveler, [fullname, email, phone_number], function(error, rows, fields){
             if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -120,7 +127,7 @@ app.delete('/delete-traveler-ajax/', function(req,res,next){
             else
             {
                 // Run the second query
-                db.pool.query(selectWorld, [homeworld], function(error, rows, fields) {
+                db.pool.query(selectTraveler, [fullname], function(error, rows, fields) {
 
                     if (error) {
                         console.log(error);
