@@ -1,5 +1,7 @@
 // ./database/db-connector.js
 
+// ./database/db-connector.js
+
 // Get an instance of mysql we can use in the app
 var mysql = require('mysql')
 
@@ -7,9 +9,9 @@ var mysql = require('mysql')
 var pool = mysql.createPool({
     connectionLimit : 10,
     host            : 'classmysql.engr.oregonstate.edu',
-    user            : 'cs340_[your_onid]',
-    password        : '[your_db_password]',
-    database        : 'cs340_[your_onid]'
+    user            : 'cs340_karlisa',
+    password        : 'TggBOWLt7JKW',
+    database        : 'cs340_karlisa'
 })
 
 // Export it for use in our applicaiton
