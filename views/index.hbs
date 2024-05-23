@@ -36,7 +36,7 @@
 <!-- /views/index.hbs -->
 
 {{!-- Form to add a record to the table  --}}
-<h2>Adding Data with AJAX (change this later)</h2>
+<h2>Adding Data with AJAX</h2>
 <p>To add a new Traveler, please enter their information below and click 'Submit'!</p>
 <form id="add-person-form-ajax">
     <label for="input-fname">First Name: </label>
@@ -53,6 +53,31 @@
 
     <input type="submit">
 </form>
+
+
+<h2>Updating a Traveler</h2>
+<p>To update a specific traveler</p>
+<form id="update-traveler-form-ajax">
+
+    <label for="input-fullname">Full name: </label>
+    <select name="input-fullname" id="mySelect">
+        <option value="test">Select a Traveler</option>
+        {{#each data}}
+        <option value="{{this.id}}">{{this.fname}} {{this.lname}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-email">Email: </label>
+    <input type="text" name="input-email" id="update-email">
+
+    <label for="input-number">Phone Number: </label>
+    <input type="number" name="input-number" id="update-number">
+
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_person.js"></script>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="/add_traveler.js"></script>
