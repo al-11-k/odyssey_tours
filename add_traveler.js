@@ -23,8 +23,8 @@ addTravelernForm.addEventListener("submit", function (e) {
     let data = {
         fname: firstNameValue,
         lname: lastNameValue,
-        email: homeworldValue,
-        number: ageValue
+        email: EmailValue,
+        number: NumberValue
     }
     
     // Setup our AJAX request
