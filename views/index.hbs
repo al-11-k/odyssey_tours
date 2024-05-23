@@ -1,7 +1,4 @@
-<!-- index.hbs -->
-<h1>The server is running!</h1>
-<p>If you see this text, the server is <strong>definitely</strong> working!</p>
-{{!-- Create a table --}}
+
 <table id="travelers-table">
 
     {{!-- Header section --}}
@@ -15,6 +12,7 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th>delete</th>
         </tr>
     </thead>
 
@@ -29,6 +27,7 @@
             <td>{{this.last_name}}</td>
             <td>{{this.email}}</td>
             <td>{{this.phone_number}}</td>
+            <td><button onclick="deletePerson({{this.id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
@@ -56,4 +55,5 @@
 </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_traveler.js"></script>
+<script src="/add_traveler.js"></script>
+<script src="/delete_traveler.js"></script>

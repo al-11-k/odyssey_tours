@@ -1,8 +1,8 @@
 // Get the objects we need to modify
-let addPersonForm = document.getElementById('add-traveler-form-ajax');
+let addTravelerForm = document.getElementById('add-traveler-form-ajax');
 
 // Modify the objects we need
-addTravelernForm.addEventListener("submit", function (e) {
+addTravelerForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
     e.preventDefault();
@@ -78,6 +78,8 @@ addRowToTable = (data) => {
     let emailCell = document.createElement("TD");
     let numberCell = document.createElement("TD");
 
+    let deleteCell = document.createElement("TD");
+
     // Fill the cells with correct data
     idCell.innerText = newRow.id;
     firstNameCell.innerText = newRow.fname;
@@ -85,12 +87,21 @@ addRowToTable = (data) => {
     emailCell.innerText = newRow.email;
     numberCell.innerText = newRow.number;
 
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function(){
+        deletePerson(newRow.id);
+    };
+
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(firstNameCell);
     row.appendChild(lastNameCell);
     row.appendChild(emailCell);
     row.appendChild(numberCell);
+    row.appendChild(deleteCell);
+
+    row.setAttribute('data-value', newRow.id);
     
     // Add the row to the table
     currentTable.appendChild(row);
