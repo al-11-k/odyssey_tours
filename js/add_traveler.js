@@ -14,10 +14,10 @@ addTravelerForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputFirstName = document.getElementById("input-fname");
-    let inputLastName = document.getElementById("input-lname");
+    let inputFirstName = document.getElementById("input-first-name");
+    let inputLastName = document.getElementById("input-last-name");
     let inputEmail = document.getElementById("input-email");
-    let inputNumber = document.getElementById("input-number");
+    let inputNumber = document.getElementById("input-phone-number");
 
     // Get the values from the form fields
     let firstNameValue = inputFirstName.value;
