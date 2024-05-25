@@ -52,12 +52,14 @@ VALUES (
 
 -- Select
 
-SELECT date_purchaed AS Date Purchased,
-    total_cost AS Total Cost,
-    description AS Description,
-    traveler_id AS Traveler ID, 
-    agent_id AS Agent ID
-FROM Travel_Packages;
+SELECT Travel_Packages.date_purchaed AS Date Purchased,
+    Travel_Packages.total_cost AS Total Cost,
+    Travel_Packages.description AS Description,
+    concat(Travelers.first_name, ' ', Travelers.last_name) as Traveler Name, 
+    concat(Travel_Agents.first_name, ' ', Travel_Agents.last_name) as Agent Name
+FROM Travel_Packages
+    INNER JOIN Travelers ON traveler_id = Travel_Packages.traveler_id;
+    INNER JOIN Travel_Agents ON agent_id = Travel_Packages.agent_id;
 
 
 -- Select to populate the Agent dropdown search and sort them alphabetically
@@ -88,12 +90,16 @@ VALUES (
 
 -- Select
 
-SELECT booking_id AS Booking ID,
-    item_id AS Item ID, 
-    item_cost AS Item Cost, 
-    quantity AS Quantity, 
+SELECT Bookings.booking_id AS Booking ID,
+    Items.description AS Item Description
+    Bookings.item_id AS Item ID, 
+    Items.item_cost AS Item Cost, 
+    Items.quantity AS Quantity,
+    Travel_Packages.description AS Package Description
     package_id AS Package ID
-FROM Bookings;
+FROM Bookings
+    INNER JOIN Items ON item_id = Bookings.item_id
+    INNER JOIN Travel_Agents ON package_id = Bookings.item_type;
 
 -- Select to populate the Travel Packages dropdown search
 
