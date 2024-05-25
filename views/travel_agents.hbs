@@ -1,0 +1,57 @@
+{{!-- // Citation for the following file:
+// Date: 05/21/2024
+// Adapted from nodejs-starter-app on github.com provided to students via Canvas/course materials
+// Code was copied and pasted from the code snippets and changed to fit the database needs for project
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+<body>
+<nav class="navbar">
+    <a href="/">Travelers</a>
+    <a href="/travel_agents">Travel Agents</a>
+</nav>
+<table id="travel-agent-table">
+
+    {{!-- Header section --}}
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.agent_id}}</td>
+            <td>{{this.first_name}}</td>
+            <td>{{this.last_name}}</td>
+            <td>{{this.email}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- /views/index.hbs -->
+
+{{!-- Form to add a record to the table using AJAX --}}
+<h2>Add a Travel Agent</h2>
+<p>To add a new travel agent, please enter their information below and click 'Submit'!</p>
+<form id="add-travel-agent-form" method="POST" action="/add-travel-agent-form">
+    <label for="input-first-name-agent">First Name: </label>
+    <input type="text" name="input-first-name-agent" id="input-first-name-agent">
+    
+    <label for="input-last-nam-agnete">Last Name: </label>
+    <input type="text" name="input-last-name-agent" id="input-last-name-agent">
+
+    <label for="input-email-agent">Email: </label>
+    <input type="text" name="input-email-agent" id="input-email-agent">
+
+    <input type="submit">
+</form>
+</body>

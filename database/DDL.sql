@@ -35,7 +35,7 @@ DROP TABLE IF EXISTS `Bookings`;
 --
 
 CREATE TABLE Travelers (
-  traveler_id int(11) NOT NULL,
+  traveler_id int(11) NOT NULL AUTO INCREMENT,
   first_name varchar(255) NOT NULL,
   last_name varchar(255) NOT NULL,
   email varchar(255) NOT NULL,
@@ -48,11 +48,11 @@ CREATE TABLE Travelers (
 -- Dumping data for table `Travelers`
 --
 
-INSERT INTO Travelers VALUES 
-(1,'Jane','Doe','janed@gmail.com','555-555-5555'),
-(2,'Joe','Brown','jbrown@gmail.com','505-525-2233'),
-(3,'Ally','Karlis','akarlis@gmail.com','364-574-0292'),
-(4,'Brittany','Healey','bhealey@gmail.com','364-373-2739');
+INSERT INTO Travelers(first_name, last_name, email, phone_number) VALUES 
+('Jane','Doe','janed@gmail.com','555-555-5555'),
+('Joe','Brown','jbrown@gmail.com','505-525-2233'),
+('Ally','Karlis','akarlis@gmail.com','364-574-0292'),
+('Brittany','Healey','bhealey@gmail.com','364-373-2739');
 
 
 -- --------------------------------------------------------
@@ -62,7 +62,7 @@ INSERT INTO Travelers VALUES
 --
 
 CREATE TABLE Travel_Agents (
-    agent_id int(11) NOT NULL,
+    agent_id int(11) NOT NULL AUTO_INCREMENT,
     first_name varchar(255) NOT NULL,
     last_name varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
@@ -75,11 +75,11 @@ CREATE TABLE Travel_Agents (
 --
 
 
-INSERT INTO `Travel_Agents` VALUES
-(1, 'Chris', 'Spreadsheet', 'csheet@gmail.com'),
-(2, 'Delores', 'Umbridge', 'dumbridge@gmail.com'),
-(3, 'Satoru', 'Gojo', 'gojo@gmail.com'),
-(4, 'Some', 'Guy', 'someg@gmail.com');
+INSERT INTO Travel_Agents (first_name, last_name, email) VALUES
+('Chris', 'Spreadsheet', 'csheet@gmail.com'),
+('Delores', 'Umbridge', 'dumbridge@gmail.com'),
+('Satoru', 'Gojo', 'gojo@gmail.com'),
+('Some', 'Guy', 'someg@gmail.com');
 
 -- --------------------------------------------------------
 

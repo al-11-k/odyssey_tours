@@ -3,6 +3,11 @@
 // Adapted from nodejs-starter-app on github.com provided to students via Canvas/course materials
 // Code was copied and pasted from the code snippets and changed to fit the database needs for project
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+<body>
+<nav class="navbar">
+    <a href="/">Travelers</a>
+    <a href="travel_agents">Travel Agents</a>
+  </nav>
 
 <table id="travelers-table">
 
@@ -29,7 +34,6 @@
             <td>{{this.last_name}}</td>
             <td>{{this.email}}</td>
             <td>{{this.phone_number}}</td>
-            <td><button onclick="deletePerson({{this.id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
@@ -37,20 +41,20 @@
 
 <!-- /views/index.hbs -->
 
-{{!-- Form to add a record to the table  --}}
-<h2>Adding a Traveler</h2>
-<p>To add a new Traveler, please enter their information below and click 'Submit'!</p>
-<form id="add-person-form-ajax">
-    <label for="input-fname">First Name: </label>
+{{!-- Form to add a record to the table using AJAX --}}
+<h2>Add a Traveler</h2>
+<p>To add a new traveler, please enter their information below and click 'Submit'!</p>
+<form id="add-traveler-form" method="POST" action="/add-traveler-form">
+    <label for="input-first-name">First Name: </label>
     <input type="text" name="input-first-name" id="input-first-name">
     
-    <label for="input-lname">Last Name: </label>
+    <label for="input-last-name">Last Name: </label>
     <input type="text" name="input-last-name" id="input-last-name">
 
     <label for="input-email">Email: </label>
     <input type="text" name="input-email" id="input-email">
 
-    <label for="input-number">Phone Number: </label>
+    <label for="input-phone-number">Phone Number: </label>
     <input type="number" name="input-phone-number" id="input-phone-number">
 
     <input type="submit">
@@ -78,10 +82,6 @@
     <input type="submit">
 
 </form>
+</body>
 
-<script src="./js/update_person.js"></script>
 
-{{!-- Embed javascript to handle  --}}
-<script src="/js/add_traveler.js"></script>
-<script src="/js/delete_traveler.js"></script>
-<script src="/js/update_person.js"></script>
