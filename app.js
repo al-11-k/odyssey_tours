@@ -189,7 +189,54 @@ app.get('/travel_packages', function(req, res)
 
 
 
+
+
+
+    app.post('/add-travel-package-form', function(req, res) {
+        let data = req.body;
+    
+        let query1 = `INSERT INTO Travel_Packages(date, total_cost, description, traveler_id, agent_id) VALUES ('${data['input-package-date']}', '${data['input-package-total-cost']}', '${data['input-package-description']}', '${data['input-package-traveler-id']}', '${data['input-package-agent-id']}')`;
+    
+        db.pool.query(query1, function(error, rows, fields) {
+            if (error) {
+                console.log(error);
+                res.sendStatus(400);
+            } else {
+                // Execute the queries to get traveler and agent names
+                let query2 = `SELECT traveler_id, first_name, last_name FROM Travelers;`;
+                let query3 = `SELECT agent_id, first_name, last_name FROM Travel_Agents;`;
+    
+                db.pool.query(query2, function(error, travelers, fields) {
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus(400);
+                    } else {
+                        db.pool.query(query3, function(error, agents, fields) {
+                            if (error) {
+                                console.log(error);
+                                res.sendStatus(400);
+                            } else {
+                                res.render('travel_packages', { 
+                                    data: packages, 
+                                    traveler: travelers, 
+                                    agent: agents 
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+
+
+
+
+
+
 // insert a travel package
+/*
 app.post('/add-travel-package-form', function(req, res) 
 {
     let data = req.body;
@@ -197,7 +244,9 @@ app.post('/add-travel-package-form', function(req, res)
 
 
     // NEED TO ADD QUERIES TO POPULATE DROPDOWN MENUS
-    query1 = `INSERT INTO Travel_Packages(date, total_cost, description, traveler_id, agent_id) VALUES ('${data['input-package-date']}', '${data['input-package-total-cost']}', '${data['input-package-description']}, '${data['input-package-traveler-id']}', '${data['input-package-agent-id']}')`;
+    let query1 = `INSERT INTO Travel_Packages(date, total_cost, description, traveler_id, agent_id) VALUES ('${data['input-package-date']}', '${data['input-package-total-cost']}', '${data['input-package-description']}, '${data['input-package-traveler-id']}', '${data['input-package-agent-id']}')`;
+    let query2 = `SELECT first_name, last_name FROM Travelers;`;
+    let query3 = `SELECT first_name, last_name FROM Travel_Agents;`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -216,6 +265,7 @@ app.post('/add-travel-package-form', function(req, res)
         }
     })
 })
+*/
 
 
 

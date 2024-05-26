@@ -56,9 +56,10 @@
 <!-- /views/index.hbs -->
 
 {{!-- Form to add a record to the table using AJAX --}}
-<h2>Add a Travel Agent</h2>
-<p>To add a new travel agent, please enter their information below and click 'Submit'!</p>
+<div id="insert">
 <form id="add-travel-agent-form" method="POST" action="/add-travel-agent-form">
+    <legend><strong>Add a Travel Agent</strong></legend>
+    <fieldset class="fields">
     <label for="input-first-name-agent">First Name: </label>
     <input type="text" name="input-first-name-agent" id="input-first-name-agent">
     
@@ -69,5 +70,8 @@
     <input type="text" name="input-email-agent" id="input-email-agent">
 
     <input type="submit" class="affirmButton">
+</fieldset>
 </form>
+</div>
+
 </body>

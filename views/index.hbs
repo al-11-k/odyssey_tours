@@ -58,9 +58,10 @@
 <!-- /views/index.hbs -->
 
 {{!-- Form to add a record to the table using AJAX --}}
-<h2>Add a Traveler</h2>
-<p>To add a new traveler, please enter their information below and click 'Submit'!</p>
+<div id="insert">
 <form id="add-traveler-form" method="POST" action="/add-traveler-form">
+    <legend><strong>Add Traveler</strong></legend>
+    <fieldset class="fields">
     <label for="input-first-name">First Name: </label>
     <input type="text" name="input-first-name" id="input-first-name">
     
@@ -74,13 +75,14 @@
     <input type="number" name="input-phone-number" id="input-phone-number">
 
     <input type="submit" class="affirmButton">
+    </fieldset>
 </form>
+</div>
 
 
-<h2>Updating a Traveler</h2>
-<p>To update a specific traveler</p>
 <form id="update-traveler-form-ajax">
-
+    <legend><strong>Update Traveler</strong></legend>
+    <fieldset class="fields">
     <label for="input-fullname">Full name: </label>
     <select name="input-fullname" id="mySelect">
         <option value="test">Select a Traveler</option>
@@ -96,6 +98,7 @@
     <input type="number" name="input-number" id="update-number">
 
     <input type="submit">
+    </fieldset>
 
 </form>
 </body>

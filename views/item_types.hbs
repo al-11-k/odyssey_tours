@@ -52,13 +52,17 @@
     </tbody>
 </table>
 
-<h2>Add an Item Type</h2>
-<p>To add a item type, please enter their information below and click 'Submit'!</p>
+<div id="insert">
 <form id="add-item-type-form" method="POST" action="/add-item-type-form">
+    <legend><strong>Add an Item Type</strong></legend>
+    <fieldset class="fields">
     <label for="input-item-type-description">Description: </label>
     <input type="text-area" name="input-item-type-description" id="input-item-type-description">
 
     <input type="submit" class="affirmButton">
+</fieldset>
 </form>
+</div>
+
 
 </body>
