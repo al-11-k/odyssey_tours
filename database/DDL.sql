@@ -88,7 +88,7 @@ INSERT INTO Travel_Agents (first_name, last_name, email) VALUES
 --
 
 CREATE TABLE Travel_Packages (
-  package_id int(11) NOT NULL,
+  package_id int(11) NOT NULL AUTO_INCREMENT,
   date date NOT NULL,
   total_cost decimal(6,2) NOT NULL,
   description varchar(255),
@@ -103,11 +103,11 @@ CREATE TABLE Travel_Packages (
 -- Dumping data for table `Travel_Packages`
 --
 
-INSERT INTO Travel_Packages VALUES
-(1, '2024-04-20', 464, 'NYC Day Tour', (SELECT traveler_id from Travelers where traveler_id = 1), (SELECT agent_id from Travel_Agents where agent_id = 2)),
-(2, '2024-04-10', 8280.58, 'France Tour Package', (SELECT traveler_id from Travelers where traveler_id = 2), (SELECT agent_id from Travel_Agents where agent_id = 3)),
-(3, '2024-04-01', 232, 'NYC Day Tour', (SELECT traveler_id from Travelers where traveler_id = 4), (SELECT agent_id from Travel_Agents where agent_id = 3)),
-(4, '2024-03-29', 280, 'Seattle Flight', (SELECT traveler_id from Travelers where traveler_id = 3), (SELECT agent_id from Travel_Agents where agent_id = 4));
+INSERT INTO Travel_Packages(date, total_cost, description, traveler_id, agent_id) VALUES
+('2024-04-20', 464, 'NYC Day Tour', (SELECT traveler_id from Travelers where traveler_id = 1), (SELECT agent_id from Travel_Agents where agent_id = 2)),
+('2024-04-10', 8280.58, 'France Tour Package', (SELECT traveler_id from Travelers where traveler_id = 2), (SELECT agent_id from Travel_Agents where agent_id = 3)),
+('2024-04-01', 232, 'NYC Day Tour', (SELECT traveler_id from Travelers where traveler_id = 4), (SELECT agent_id from Travel_Agents where agent_id = 3)),
+('2024-03-29', 280, 'Seattle Flight', (SELECT traveler_id from Travelers where traveler_id = 3), (SELECT agent_id from Travel_Agents where agent_id = 4));
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,7 @@ INSERT INTO Travel_Packages VALUES
 --
 
 CREATE TABLE Item_Types (
-  item_type int(11) NOT NULL,
+  item_type int(11) NOT NULL AUTO_INCREMENT,
   description varchar(255) NOT NULL,
   PRIMARY KEY (item_type),
   UNIQUE KEY `item` (item_type)
@@ -126,10 +126,10 @@ CREATE TABLE Item_Types (
 -- Dumping data for table `Item_Types`
 --
 
-INSERT INTO Item_Types VALUES
-(1, 'Guided Activity'),
-(2, 'Hotel Reservation'),
-(3, 'Flight');
+INSERT INTO Item_Types (description) VALUES
+('Guided Activity'),
+('Hotel Reservation'),
+('Flight');
 
 -- --------------------------------------------------------
 
@@ -139,7 +139,7 @@ INSERT INTO Item_Types VALUES
 
 
 CREATE TABLE Items (
-  item_id int(11) NOT NULL,
+  item_id int(11) NOT NULL AUTO_INCREMENT,
   description varchar(255) NOT NULL,
   cost decimal(6,2) NOT NULL,
   item_type int NOT NULL,
@@ -152,11 +152,11 @@ CREATE TABLE Items (
 -- Dumping data for table `Items`
 --
 
-INSERT INTO Items VALUES
-(1, 'NYC Walking Tour', 232, (SELECT item_type from Item_Types where item_type = 1)),
-(2, 'Paris Hotel Reservation', 2340.29, (SELECT item_type from Item_Types where item_type = 2)),
-(3, 'Round-Trip Flight from GEG to CDG', 1800, (SELECT item_type from Item_Types where item_type = 3)),
-(4, 'Round-Trip Flight from GEG to SEA', 300, (SELECT item_type from Item_Types where item_type = 3));
+INSERT INTO Items (description, cost, item_type) VALUES
+('NYC Walking Tour', 232, (SELECT item_type from Item_Types where item_type = 1)),
+('Paris Hotel Reservation', 2340.29, (SELECT item_type from Item_Types where item_type = 2)),
+('Round-Trip Flight from GEG to CDG', 1800, (SELECT item_type from Item_Types where item_type = 3)),
+('Round-Trip Flight from GEG to SEA', 300, (SELECT item_type from Item_Types where item_type = 3));
 
 -- --------------------------------------------------------
 
@@ -165,7 +165,7 @@ INSERT INTO Items VALUES
 --
 
 CREATE TABLE Bookings (
-  booking_id int(11) NOT NULL,
+  booking_id int(11) NOT NULL AUTO_INCREMENT,
   quantity int NOT NULL,
   item_cost decimal(6,2) NOT NULL,
   subtotal decimal(6,2) NOT NULL,
@@ -182,12 +182,12 @@ CREATE TABLE Bookings (
 -- Dumping data for table `Bookings`
 --
 
-INSERT INTO Bookings VALUES 
-(1, 2, 232, 464, (SELECT package_id from Travel_Packages where package_id = 1), (SELECT item_id from Items where item_id = 1),),
-(2, 2, 2340.29, 4680.58, (SELECT package_id from Travel_Packages where package_id = 2), (SELECT item_id from Items where item_id = 2)),
-(3, 2, 1800, 3600, (SELECT package_id from Travel_Packages where package_id = 2), (SELECT item_id from Items where item_id = 3)),
-(4, 1, 232, 232,, (SELECT package_id from Travel_Packages where package_id = 3),  (SELECT item_id from Items where item_id = 1)),
-(5, 1, 280, 280, (SELECT package_id from Travel_Packages where package_id = 4), (SELECT item_id from Items where item_id = 4));
+INSERT INTO Bookings(quantity, tiem_cost, package_id, item_id) VALUES 
+(2, 232, 464, (SELECT package_id from Travel_Packages where package_id = 1), (SELECT item_id from Items where item_id = 1),),
+(2, 2340.29, 4680.58, (SELECT package_id from Travel_Packages where package_id = 2), (SELECT item_id from Items where item_id = 2)),
+(2, 1800, 3600, (SELECT package_id from Travel_Packages where package_id = 2), (SELECT item_id from Items where item_id = 3)),
+(1, 232, 232,, (SELECT package_id from Travel_Packages where package_id = 3),  (SELECT item_id from Items where item_id = 1)),
+(1, 280, 280, (SELECT package_id from Travel_Packages where package_id = 4), (SELECT item_id from Items where item_id = 4));
 
 -- --------------------------------------------------------
 
