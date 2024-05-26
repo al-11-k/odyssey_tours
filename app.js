@@ -176,6 +176,50 @@ app.post('/add-travel-agent-form', function(req, res)
 
 
 
+// display travel packages
+app.get('/travel_packages', function(req, res)
+    {  
+        let query1 = "SELECT * FROM Travel_Packages;";               
+
+        db.pool.query(query1, function(error, rows, fields){    
+
+            res.render('travel_packages', {data: rows});                  
+        })                                                      
+    });   
+
+
+
+// insert a travel package
+app.post('/add-travel-package-form', function(req, res) 
+{
+    let data = req.body;
+
+
+
+    // NEED TO ADD QUERIES TO POPULATE DROPDOWN MENUS
+    query1 = `INSERT INTO Travel_Packages(date, total_cost, description, traveler_id, agent_id) VALUES ('${data['input-package-date']}', '${data['input-package-total-cost']}', '${data['input-package-description']}, '${data['input-package-traveler-id']}', '${data['input-package-agent-id']}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/travel_packages');
+        }
+    })
+})
+
+
+
+
 
 // display item types
 app.get('/item_types', function(req, res)
@@ -211,7 +255,7 @@ app.post('/add-item-type-form', function(req, res)
         // presents it on the screen
         else
         {
-            res.redirect('/item_types');
+            res.redirect('/');
         }
     })
 })
