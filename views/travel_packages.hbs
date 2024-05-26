@@ -25,7 +25,7 @@
     </button>
 </div>
 
-<table id="travelers-table">
+<table id="travel-packages-table">
 
     {{!-- Header section --}}
     <thead>
@@ -42,23 +42,23 @@
     {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{!-- need to change traveler and agent id to show name instead of number --}}
         {{#each data}}
         <tr>
+            <td>{{this.package_id}}</td>
+            <td>{{this.date}}</td>
+            <td>{{this.total_cost}}</td>
+            <td>{{this.description}}</td>
             <td>{{this.traveler_id}}</td>
-            <td>{{this.first_name}}</td>
-            <td>{{this.last_name}}</td>
-            <td>{{this.email}}</td>
-            <td>{{this.phone_number}}</td>
+            <td>{{this.agent_id}}</td>
         </tr>
         {{/each}}
     </tbody>
 </table>
 
-<!-- /views/index.hbs -->
 
-{{!-- Form to add a record to the table using AJAX --}}
-<h2>Add a Traveler</h2>
+{{!-- UNFINISHED --}}
+<h2>Add a Travel Package</h2>
 <p>To add a new traveler, please enter their information below and click 'Submit'!</p>
 <form id="add-traveler-form" method="POST" action="/add-traveler-form">
     <label for="input-first-name">First Name: </label>
@@ -99,5 +99,3 @@
 
 </form>
 </body>
-
-

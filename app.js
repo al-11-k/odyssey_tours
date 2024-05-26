@@ -174,6 +174,49 @@ app.post('/add-travel-agent-form', function(req, res)
 })
 
 
+
+
+
+// display item types
+app.get('/item_types', function(req, res)
+    {  
+        let query1 = "SELECT * FROM Item_Types;";               
+
+        db.pool.query(query1, function(error, rows, fields){    
+
+            res.render('item_types', {data: rows});                  
+        })                                                      
+    });                                                         
+
+
+// insert a travel agent
+app.post('/add-item-type-form', function(req, res) 
+{
+    let data = req.body;
+
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Item_Types(description) VALUES ('${data['input-item-type-description']}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/item_types');
+        }
+    })
+})
+
+
 // delete traveler
 app.delete('/delete-traveler-ajax/', function(req,res,next){
     let data = req.body;

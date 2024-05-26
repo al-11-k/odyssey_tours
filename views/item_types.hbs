@@ -3,6 +3,7 @@
 // Adapted from nodejs-starter-app on github.com provided to students via Canvas/course materials
 // Code was copied and pasted from the code snippets and changed to fit the database needs for project
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
 <body>
 <div id="nav_bar">
     <button>
@@ -24,7 +25,7 @@
         <a href="item_types">Item Types</a>
     </button>
 </div>
-<table id="travel-agent-table">
+<table id="item-types-table">
 
     {{!-- Header section --}}
     <thead>
@@ -41,33 +42,23 @@
     {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{!-- need to change traveler and agent id to show name instead of number --}}
         {{#each data}}
         <tr>
-            <td>{{this.agent_id}}</td>
-            <td>{{this.first_name}}</td>
-            <td>{{this.last_name}}</td>
-            <td>{{this.email}}</td>
+            <td>{{this.item_type}}</td>
+            <td>{{this.description}}</td>
         </tr>
         {{/each}}
     </tbody>
 </table>
 
-<!-- /views/index.hbs -->
-
-{{!-- Form to add a record to the table using AJAX --}}
-<h2>Add a Travel Agent</h2>
-<p>To add a new travel agent, please enter their information below and click 'Submit'!</p>
-<form id="add-travel-agent-form" method="POST" action="/add-travel-agent-form">
-    <label for="input-first-name-agent">First Name: </label>
-    <input type="text" name="input-first-name-agent" id="input-first-name-agent">
-    
-    <label for="input-last-nam-agnete">Last Name: </label>
-    <input type="text" name="input-last-name-agent" id="input-last-name-agent">
-
-    <label for="input-email-agent">Email: </label>
-    <input type="text" name="input-email-agent" id="input-email-agent">
+<h2>Add an Item Type</h2>
+<p>To add a item type, please enter their information below and click 'Submit'!</p>
+<form id="add-item-type-form" method="POST" action="/add-item-type-form">
+    <label for="input-item-type-description">Description: </label>
+    <input type="text-area" name="input-item-type-description" id="input-item-type-description">
 
     <input type="submit" class="affirmButton">
 </form>
+
 </body>
