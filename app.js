@@ -15,7 +15,7 @@ var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-PORT = 9982;
+PORT = 9981;
 
 // Database
 var db = require('./database/db-connector');
@@ -190,36 +190,47 @@ app.get('/travel_packages', function(req, res)
 
 
 
-
+// DROP DOWN MENU STILL DOESNT WORK :(
 
     app.post('/add-travel-package-form', function(req, res) {
         let data = req.body;
     
-        let query1 = `INSERT INTO Travel_Packages(date, total_cost, description, traveler_id, agent_id) VALUES ('${data['input-package-date']}', '${data['input-package-total-cost']}', '${data['input-package-description']}', '${data['input-package-traveler-id']}', '${data['input-package-agent-id']}')`;
+        // Queries to get traveler and agent data
+        let queryTravelers = `SELECT traveler_id, first_name, last_name FROM Travelers;`;
+        let queryAgents = `SELECT agent_id, first_name, last_name FROM Travel_Agents;`;
     
-        db.pool.query(query1, function(error, rows, fields) {
+        db.pool.query(queryTravelers, function(error, travelers, fields) {
             if (error) {
                 console.log(error);
                 res.sendStatus(400);
             } else {
-                // Execute the queries to get traveler and agent names
-                let query2 = `SELECT traveler_id, first_name, last_name FROM Travelers;`;
-                let query3 = `SELECT agent_id, first_name, last_name FROM Travel_Agents;`;
-    
-                db.pool.query(query2, function(error, travelers, fields) {
+                db.pool.query(queryAgents, function(error, agents, fields) {
                     if (error) {
                         console.log(error);
                         res.sendStatus(400);
                     } else {
-                        db.pool.query(query3, function(error, agents, fields) {
+                        // Query to insert new travel package
+                        let queryInsert = `INSERT INTO Travel_Packages(date, total_cost, description, traveler_id, agent_id) VALUES ('${data['input-package-date']}', '${data['input-package-total-cost']}', '${data['input-package-description']}', '${data['input-package-traveler-id']}', '${data['input-package-agent-id']}')`;
+    
+                        db.pool.query(queryInsert, function(error, result) {
                             if (error) {
                                 console.log(error);
                                 res.sendStatus(400);
                             } else {
-                                res.render('travel_packages', { 
-                                    data: packages, 
-                                    traveler: travelers, 
-                                    agent: agents 
+                                // Query to get all travel packages
+                                let queryPackages = `SELECT * FROM Travel_Packages;`;
+    
+                                db.pool.query(queryPackages, function(error, packages, fields) {
+                                    if (error) {
+                                        console.log(error);
+                                        res.sendStatus(400);
+                                    } else {
+                                        res.render('travel_packages', { 
+                                            data: packages, 
+                                            travelers: travelers, 
+                                            agents: agents 
+                                        });
+                                    }
                                 });
                             }
                         });
@@ -228,6 +239,8 @@ app.get('/travel_packages', function(req, res)
             }
         });
     });
+    
+    
 
 
 
@@ -235,18 +248,114 @@ app.get('/travel_packages', function(req, res)
 
 
 
-// insert a travel package
-/*
-app.post('/add-travel-package-form', function(req, res) 
+    // display items
+app.get('/items', function(req, res)
+{  
+    let query1 = "SELECT * FROM Items;";               
+
+    db.pool.query(query1, function(error, rows, fields){    
+
+        res.render('items', {data: rows});                  
+    })                                                      
+});   
+
+
+
+
+// DROP DOWN MENU STILL DOESNT WORK :(
+
+app.post('/add-items-form', function(req, res) {
+    let data = req.body;
+
+    // Queries to get traveler and agent data
+    let query2 = `SELECT item_type, description FROM Items;`;
+
+    db.pool.query(query2, function(error, travelers, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+
+                    // Query to insert new travel package
+                    let query1 = `INSERT INTO Items(description, cost, item_type) VALUES ('${data['input-item-description']}', '${data['input-item-cost']}', '${data['input-item-type']}')`;
+
+                    db.pool.query(query1, function(error, result) {
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            // Query to get all travel packages
+                            let query3 = `SELECT * FROM Items;`;
+
+                            db.pool.query(query3, function(error, items, fields) {
+                                if (error) {
+                                    console.log(error);
+                                    res.sendStatus(400);
+                                } else {
+                                    res.render('items', { 
+                                        data: items, 
+                                        item_type: item_type, 
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+
+
+    
+
+
+
+
+
+
+
+app.get('/bookings', function(req, res) {
+    let data = req.body;
+
+        // Declare Query 1
+        let query1 = "SELECT * FROM Bookings;";
+
+        // Query 2 is the same in both cases
+        let query2 = "SELECT * FROM Travel_Packages;";
+
+        let query3 = "SELECT * FROM Items;";
+    
+        // Run the 1st query
+        db.pool.query(query1, function(error, rows, fields){
+            
+            // Save the people
+            let bookings = rows;
+            
+            // Run the second query
+            db.pool.query(query2, (error, rows, fields) => {
+                
+                // Save the planets
+                let travel_packages = rows;
+                db.pool.query(query3, (error, rows, fields) => {
+
+                    let items = rows;
+                    return res.render('bookings', {data: bookings, travel_packages: travel_packages, items: items});
+            })
+        })
+    })
+})
+
+
+
+
+
+// insert a booking
+app.post('/add-booking-form', function(req, res) 
 {
     let data = req.body;
 
-
-
-    // NEED TO ADD QUERIES TO POPULATE DROPDOWN MENUS
-    let query1 = `INSERT INTO Travel_Packages(date, total_cost, description, traveler_id, agent_id) VALUES ('${data['input-package-date']}', '${data['input-package-total-cost']}', '${data['input-package-description']}, '${data['input-package-traveler-id']}', '${data['input-package-agent-id']}')`;
-    let query2 = `SELECT first_name, last_name FROM Travelers;`;
-    let query3 = `SELECT first_name, last_name FROM Travel_Agents;`;
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Bookings(quantity, item_cost, subtotal, package_id, item_id) VALUES ('${data['input-booking-quantity']}', '${data['input-booking-item-cost']}', '${data['input-booking-subtotal']}', '${data['input-booking-package-id']}', '${data['input-booking-item-id']}')`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -261,13 +370,10 @@ app.post('/add-travel-package-form', function(req, res)
         // presents it on the screen
         else
         {
-            res.redirect('/travel_packages');
+            res.redirect('/bookings');
         }
     })
 })
-*/
-
-
 
 
 
@@ -283,7 +389,7 @@ app.get('/item_types', function(req, res)
     });                                                         
 
 
-// insert a travel agent
+// insert an item type
 app.post('/add-item-type-form', function(req, res) 
 {
     let data = req.body;
@@ -305,7 +411,7 @@ app.post('/add-item-type-form', function(req, res)
         // presents it on the screen
         else
         {
-            res.redirect('/');
+            res.redirect('item_types');
         }
     })
 })

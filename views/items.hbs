@@ -6,7 +6,7 @@
 <body>
 <div id="nav_bar">
     <button>
-        <a href="/">Travel Packages</a>
+        <a href="/">Items</a>
     </button>
     <button>
         <a href="travel_agents">Travel Agents</a>
@@ -25,7 +25,7 @@
     </button>
 </div>
 
-<table id="travel-packages-table">
+<table id="items-table">
 
     {{!-- Header section --}}
     <thead>
@@ -45,12 +45,10 @@
         {{!-- need to change traveler and agent id to show name instead of number --}}
         {{#each data}}
         <tr>
-            <td>{{this.package_id}}</td>
-            <td>{{this.date}}</td>
-            <td>{{this.total_cost}}</td>
+            <td>{{this.item_id}}</td>
             <td>{{this.description}}</td>
-            <td>{{this.traveler_id}}</td>
-            <td>{{this.agent_id}}</td>
+            <td>{{this.cost}}</td>
+            <td>{{this.item_type}}</td>
         </tr>
         {{/each}}
     </tbody>
@@ -59,31 +57,20 @@
 
 {{!-- DROP DOWN MENU DOESN"T WORK --}}
 <div id="insert">
-<form id="add-travel-package-form" method="POST" action="/add-travel-package-form">
-    <legend><strong>Add a Travel Package</strong></legend>
+<form id="add-itemform" method="POST" action="/add-item-form">
+    <legend><strong>Add an Item</strong></legend>
     <fieldset class="fields">
-    <label for="input-package-date">Date: </label>
-    <input type="date" name="input-package-date" id="input-package-date">
+    <label for="input-item-description">Date: </label>
+    <input type="text" name="input-item-description" id="input-item-description">
     
-    <label for="input-package-total-cost">Total Cost: </label>
-    <input type="number" name="input-package-total-cost" id="input-package-total-cost">
+    <label for="input-item-cost">Cost: </label>
+    <input type="number" name="input-item-cost" id="input-item-cost">
 
-    <label for="input-package-description">Description: </label>
-    <input type="text-area" name="input-package-description" id="input-package-description">
-
-    <label for="input-package-traveler-id">Traveler: </label>
-    <select name="input-package-traveler-id" id="input-package-traveler-id">
+    <label for="input-item-type">Item Type: </label>
+    <select name="input-item-type" id="input-item-type">
         <option value=""></option>
-        {{#each traveler}}
-        <option value="{{this.traveler_id}}">{{this.first_name}} {{this.last_name}}</option>
-        {{/each}}
-    </select>
-
-    <label for="input-package-agent-id">Agent: </label>
-    <select name="input-package-agent-id" id="input-package-agent-id">
-        <option value=""></option>
-        {{#each agent}}
-        <option value="{{this.agent_id}}">{{this.first_name}}{{this.last_name}}</option>
+        {{#each item_type}}
+        <option value="{{this.item_type}}">{{this.description}}</option>
         {{/each}}
     </select>
 

@@ -104,10 +104,10 @@ CREATE TABLE Travel_Packages (
 --
 
 INSERT INTO Travel_Packages(date, total_cost, description, traveler_id, agent_id) VALUES
-('2024-04-20', 464, 'NYC Day Tour', (SELECT traveler_id from Travelers where traveler_id = 1), (SELECT agent_id from Travel_Agents where agent_id = 2)),
-('2024-04-10', 8280.58, 'France Tour Package', (SELECT traveler_id from Travelers where traveler_id = 2), (SELECT agent_id from Travel_Agents where agent_id = 3)),
-('2024-04-01', 232, 'NYC Day Tour', (SELECT traveler_id from Travelers where traveler_id = 4), (SELECT agent_id from Travel_Agents where agent_id = 3)),
-('2024-03-29', 280, 'Seattle Flight', (SELECT traveler_id from Travelers where traveler_id = 3), (SELECT agent_id from Travel_Agents where agent_id = 4));
+('2024-04-20', 464, 'NYC Day Tour', (SELECT traveler_id from Travelers where traveler_id = 28), (SELECT agent_id from Travel_Agents where agent_id = 5)),
+('2024-04-10', 8280.58, 'France Tour Package', (SELECT traveler_id from Travelers where traveler_id = 29), (SELECT agent_id from Travel_Agents where agent_id = 6)),
+('2024-04-01', 232, 'NYC Day Tour', (SELECT traveler_id from Travelers where traveler_id = 31), (SELECT agent_id from Travel_Agents where agent_id = 7)),
+('2024-03-29', 280, 'Seattle Flight', (SELECT traveler_id from Travelers where traveler_id = 30), (SELECT agent_id from Travel_Agents where agent_id = 7));
 
 -- --------------------------------------------------------
 
@@ -182,12 +182,12 @@ CREATE TABLE Bookings (
 -- Dumping data for table `Bookings`
 --
 
-INSERT INTO Bookings(quantity, tiem_cost, package_id, item_id) VALUES 
-(2, 232, 464, (SELECT package_id from Travel_Packages where package_id = 1), (SELECT item_id from Items where item_id = 1),),
-(2, 2340.29, 4680.58, (SELECT package_id from Travel_Packages where package_id = 2), (SELECT item_id from Items where item_id = 2)),
-(2, 1800, 3600, (SELECT package_id from Travel_Packages where package_id = 2), (SELECT item_id from Items where item_id = 3)),
-(1, 232, 232,, (SELECT package_id from Travel_Packages where package_id = 3),  (SELECT item_id from Items where item_id = 1)),
-(1, 280, 280, (SELECT package_id from Travel_Packages where package_id = 4), (SELECT item_id from Items where item_id = 4));
+INSERT INTO Bookings(quantity, item_cost, subtotal, package_id, item_id) VALUES 
+(2, 232, 464, (SELECT package_id from Travel_Packages where package_id = 14), (SELECT item_id from Items where item_id = 10)),
+(2, 2340.29, 4680.58, (SELECT package_id from Travel_Packages where package_id = 15), (SELECT item_id from Items where item_id = 12)),
+(2, 1800, 3600, (SELECT package_id from Travel_Packages where package_id = 16), (SELECT item_id from Items where item_id = 13)),
+(1, 232, 232, (SELECT package_id from Travel_Packages where package_id = 17),  (SELECT item_id from Items where item_id = 11)),
+(1, 280, 280, (SELECT package_id from Travel_Packages where package_id = 17), (SELECT item_id from Items where item_id = 10));
 
 -- --------------------------------------------------------
 
