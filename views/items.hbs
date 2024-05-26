@@ -55,9 +55,9 @@
 </table>
 
 
-{{!-- DROP DOWN MENU DOESN"T WORK --}}
+
 <div id="insert">
-<form id="add-itemform" method="POST" action="/add-item-form">
+<form id="add-item-form" method="POST" action="/add-item-form">
     <legend><strong>Add an Item</strong></legend>
     <fieldset class="fields">
     <label for="input-item-description">Date: </label>
@@ -69,7 +69,7 @@
     <label for="input-item-type">Item Type: </label>
     <select name="input-item-type" id="input-item-type">
         <option value=""></option>
-        {{#each item_type}}
+        {{#each item_types}}
         <option value="{{this.item_type}}">{{this.description}}</option>
         {{/each}}
     </select>
