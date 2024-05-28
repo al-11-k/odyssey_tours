@@ -289,21 +289,21 @@ app.post('/add-item-type-form', function(req, res)
 
 
 // delete traveler
-app.delete('/delete-traveler-ajax/', function(req,res,next){
+app.delete('/delete-traveler-ajax', function(req, res, next) {
     let data = req.body;
     let traveler_id = parseInt(data.id);
-    let deleteTraveler= `DELETE FROM Travelers WHERE id = ?`;
-  
-  
-          // Run the 1st query
-          db.pool.query(deleteTraveler, [traveler_id], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  })});
+    let deleteTraveler = `DELETE FROM Travelers WHERE id = ?`;
+
+    // Run the query
+    db.pool.query(deleteTraveler, [traveler_id], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
 
 
 

@@ -16,9 +16,9 @@ updateTravelerForm.addEventListener("submit", function (e) {
     let inputNumber = document.getElementById("update-number");
 
     let fullNameValue = inputFullName.value;
-    let email = inputEmail.value;
-    let phone_number = inputNumber.value;
-t
+    let emailValue = inputEmail.value;
+    let numberValue = inputNumber.value;
+
     let data = {
         fullname: fullNameValue,
         email: emailValue,

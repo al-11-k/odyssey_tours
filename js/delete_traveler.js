@@ -17,6 +17,7 @@ function deleteTraveler(traveler_id) {
         if (xhttp.readyState == 4 && xhttp.status == 204) {
 
             deleteRow(traveler_id);
+            deleteDropDownMenu(traveler_id);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 204) {
@@ -27,7 +28,7 @@ function deleteTraveler(traveler_id) {
 }
 
 
-function deleteRow(personID){
+function deleteRow(traveler_id){
 
     let table = document.getElementById("travelers-table");
     for (let i = 0, row; row = table.rows[i]; i++) {
@@ -37,3 +38,14 @@ function deleteRow(personID){
        }
     }
 }
+
+function deleteDropDownMenu(traveler_id){
+    let selectMenu = document.getElementById("mySelect");
+    for (let i = 0; i < selectMenu.length; i++){
+      if (Number(selectMenu.options[i].value) === Number(traveler_id)){
+        selectMenu[i].remove();
+        break;
+      } 
+  
+    }
+  }
