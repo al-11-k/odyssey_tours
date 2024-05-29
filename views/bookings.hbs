@@ -44,17 +44,20 @@
 
         {{!-- need to change traveler and agent id to show name instead of number --}}
         {{#each data}}
-        <tr>
+        <tr data-value={{this.booking_id}}>
             <td>{{this.booking_id}}</td>
             <td>{{this.quantity}}</td>
             <td>{{this.item_cost}}</td>
             <td>{{this.subtotal}}</td>
             <td>{{this.package_id}}</td>
             <td>{{this.item_id}}</td>
+            <td><button onclick="deleteBooking({{this.booking_id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+<script src="/js/delete_booking.js"></script>
 
 
 
@@ -65,11 +68,6 @@
     <label for="input-booking-quantity">Quantity: </label>
     <input type="number" name="input-booking-quantity" id="input-booking-quantity">
     
-    <label for="input-booking-item-cost">Item Cost: </label>
-    <input type="number" name="input-booking-item-cost" id="input-booking-item-cost">
-
-    <label for="input-booking-subtotal">Subtotal: </label>
-    <input type="number" name="input-booking-subtotal" id="input-booking-subtotal">
 
     <label for="input-booking-package-id">Package: </label>
     <select name="input-booking-package-id" id="input-booking-package-id">
@@ -90,6 +88,31 @@
     <input type="submit" class="affirmButton">
 </fieldset>
 </form>
+</div>
+
+<div id="insert">
+
+<form id="update-booking-form" method="POST" action="/update-booking-form">
+<legend><strong>Update a Booking</strong></legend>
+    <label for="update-booking-id">Booking ID: </label>
+    <select name="update-booking-id" id="mySelect">
+        <option value="test">Select an ID</option>
+        {{#each data}}
+        <option value="{{this.booking_id}}">{{this.booking_id}}</option>
+        {{/each}}
+    </select>
+
+    <label for="update-booking-quantity">Quantity: </label>
+    <input type="number" name="update-booking-quantity" id="update-booking-quantity">
+
+    <label for="update-booking-item-cost">Item Cost: </label>
+    <input type="float-input" name="update-booking-item-cost" id="update-booking-item-cost">
+    
+    <input type="submit" class="affirmButton">
+
+</form>
+
+{{!--<script src="./js/update_person.js"></script> --}}
 </div>
 
 

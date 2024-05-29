@@ -4,6 +4,7 @@
 // Code was copied and pasted from the code snippets and changed to fit the database needs for project
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <body>
 <div id="nav_bar">
     <button>
@@ -45,19 +46,18 @@
 
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
-        <tr data-value={{this.id}}>
-            <td>{{this.id}}</td>
+        <tr data-value={{this.traveler_id}}>
             <td>{{this.traveler_id}}</td>
             <td>{{this.first_name}}</td>
             <td>{{this.last_name}}</td>
             <td>{{this.email}}</td>
             <td>{{this.phone_number}}</td>
-            <td><button onclick="deletePerson({{this.id}})">Delete</button></td>
+            <td><button onclick="deleteTraveler({{this.traveler_id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
-<script src="./js/delete_traveler.js"></script>
+<script src="/js/delete_traveler.js"></script>
 
 <!-- /views/index.hbs -->
 
@@ -83,29 +83,4 @@
 </form>
 </div>
 
-
-<form id="update-traveler-form-ajax">
-    <legend><strong>Update Traveler</strong></legend>
-    <fieldset class="fields">
-    <label for="input-fullname">Full name: </label>
-    <select name="input-fullname" id="mySelect">
-        <option value="test">Select a Traveler</option>
-        {{#each data}}
-        <option value="{{this.id}}">{{this.first_name}} {{this.last_name}}</option>
-        {{/each}}
-    </select>
-
-    <label for="input-email">Email: </label>
-    <input type="text" name="input-email" id="update-email">
-
-    <label for="input-number">Phone Number: </label>
-    <input type="number" name="input-number" id="update-number">
-
-    <input type="submit">
-    </fieldset>
-
-</form>
-<script src="./js/update_traveler.js"></script>
 </body>
-
-

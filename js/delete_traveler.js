@@ -10,7 +10,7 @@ function deleteTraveler(traveler_id) {
     };
 
     var xhttp = new XMLHttpRequest();
-    xhttp.open("DELETE", "/delete-traveler-ajax", true);
+    xhttp.open("DELETE", "/delete-traveler-ajax/", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     xhttp.onreadystatechange = () => {

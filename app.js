@@ -15,7 +15,7 @@ var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-PORT = 9981;
+PORT = 9981; //change back to 9981
 
 // Database
 var db = require('./database/db-connector');
@@ -62,6 +62,34 @@ app.post('/add-traveler-form', function(req, res)
         }
     })
 })
+
+
+
+
+// delete a traveler
+app.delete('/delete-traveler-ajax/', function(req,res,next){
+    let data = req.body;
+    let travelerID = parseInt(data.traveler_id);
+    let deleteTraveler = `DELETE FROM Travelers WHERE pid = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteTraveler, [travelerID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                res.sendStatus(204);
+              }
+  })});
+
+
+
 
 
 // display travel agents
@@ -114,6 +142,7 @@ app.get('/travel_packages', function(req, res) {
             db.pool.query(query2, (error, rows, fields) => {
                 
                 let travel_agents = rows;
+
                 db.pool.query(query3, (error, rows, fields) => {
 
                     let travelers = rows;
@@ -156,7 +185,7 @@ app.post('/add-travel-package-form', function(req, res)
 app.get('/items', function(req, res) {
     let data = req.body;
 
-        let query1 = "SELECT * FROM Travel_Packages;";
+        let query1 = "SELECT * FROM Items;";
         let query2 = "SELECT * FROM Item_Types;";
     
         db.pool.query(query1, function(error, rows, fields){
@@ -235,7 +264,9 @@ app.post('/add-booking-form', function(req, res)
 {
     let data = req.body;
 
-    query1 = `INSERT INTO Bookings(quantity, item_cost, subtotal, package_id, item_id) VALUES ('${data['input-booking-quantity']}', '${data['input-booking-item-cost']}', '${data['input-booking-subtotal']}', '${data['input-booking-package-id']}', '${data['input-booking-item-id']}')`;
+
+    query1 = `INSERT INTO Bookings(quantity, item_cost, subtotal, package_id, item_id) VALUES ('${data['input-booking-quantity']}', (SELECT cost FROM Items WHERE item_id = '${data['input-booking-item-id']}'), ((SELECT cost FROM Items WHERE item_id = '${data['input-booking-item-id']}') * '${data['input-booking-quantity']}') , '${data['input-booking-package-id']}', '${data['input-booking-item-id']}')`;
+    query2 = `UPDATE Travel_Packages SET total_cost = (SELECT SUM(subtotal) FROM Bookings WHERE package_id = (SELECT package_id FROM Bookings WHERE booking_id = '${data['update-booking-id']}')) WHERE package_id = (SELECT package_id FROM Bookings WHERE booking_id = '${data['update-booking-id']}')`;
     db.pool.query(query1, function(error, rows, fields){
 
         if (error) {
@@ -246,10 +277,58 @@ app.post('/add-booking-form', function(req, res)
 
         else
         {
-            res.redirect('/bookings');
+            db.pool.query(query2, function(error, rows, fields){
+                if (error) {
+                    console.log(error)
+                    res.sendStatus(400);
+            }
+    
+                else {
+                    res.redirect('/bookings');
+
+                }
+
+
+            })
         }
     })
-})
+});
+
+// update booking
+app.post('/update-booking-form', function(req, res) 
+{
+    let data = req.body;
+
+    query1 = `UPDATE Bookings SET quantity = '${data['update-booking-quantity']}', item_cost = '${data['update-booking-item-cost']}', subtotal = ('${data['update-booking-item-cost']}' * '${data['update-booking-quantity']}') WHERE booking_id = '${data['update-booking-id']}'`;
+    query2 = `UPDATE Travel_Packages SET total_cost = (SELECT SUM(subtotal) FROM Bookings WHERE package_id = (SELECT package_id FROM Bookings WHERE booking_id = '${data['update-booking-id']}')) WHERE package_id = (SELECT package_id FROM Bookings WHERE booking_id = '${data['update-booking-id']}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        if (error) {
+
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        else
+        {
+            db.pool.query(query2, function(error, rows, fields){
+                if (error) {
+                    console.log(error)
+                    res.sendStatus(400);
+            }
+    
+                else {
+                    res.redirect('/bookings');
+
+                }
+
+
+            })
+        }
+    })
+});
+
+
 
 
 
@@ -305,45 +384,6 @@ app.delete('/delete-traveler-ajax', function(req, res, next) {
     });
 });
 
-
-
-
-  // update traveler
-  app.put('/put-person-ajax', function(req,res,next){
-  let data = req.body;
-
-  let fullname = data.fullname;
-  let email = parseInt(data.email);
-  let phone_number = parseInt(data.phone_number)
-
-  let queryUpdateTraveler = `UPDATE Travelers SET fullname = ? WHERE Travelers.id = ?`;
-  let selectTraveler = `SELECT * FROM Travelers WHERE id = ?`
-
-        // Run the 1st query
-        db.pool.query(queryUpdateTraveler, [fullname, email, phone_number], function(error, rows, fields){
-            if (error) {
-
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error);
-            res.sendStatus(400);
-            }
-
-            // If there was no error, we run our second query and return that data so we can use it to update the people's
-            // table on the front-end
-            else
-            {
-                // Run the second query
-                db.pool.query(selectTraveler, [fullname], function(error, rows, fields) {
-
-                    if (error) {
-                        console.log(error);
-                        res.sendStatus(400);
-                    } else {
-                        res.send(rows);
-                    }
-                })
-            }
-})});
 
 /*
     LISTENER
