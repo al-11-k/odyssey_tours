@@ -15,7 +15,7 @@ var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-PORT = 9981; //change back to 9981
+PORT = 9978; //change back to 9981
 
 // Database
 var db = require('./database/db-connector');
@@ -49,6 +49,29 @@ app.post('/add-traveler-form', function(req, res)
 
     query1 = `INSERT INTO Travelers(first_name, last_name, email, phone_number) VALUES ('${data['input-first-name']}', '${data['input-last-name']}', '${data['input-email']}', '${data['input-phone-number']}')`;
     db.pool.query(query1, function(error, rows, fields){
+
+        if (error) {
+
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        else
+        {
+            res.redirect('/');
+        }
+    })
+})
+
+
+
+// delete a traveler
+app.post('/delete-traveler/', function(req, res) 
+{
+    let traveler_id = req.body.traveler_id;
+
+    query1 = `DELETE FROM Travelers WHERE traveler_id = ?`;
+    db.pool.query(query1, [traveler_id], function(error, rows, fields){
 
         if (error) {
 

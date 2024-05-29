@@ -52,12 +52,14 @@
             <td>{{this.last_name}}</td>
             <td>{{this.email}}</td>
             <td>{{this.phone_number}}</td>
-            <td><button onclick="deleteTraveler({{this.traveler_id}})">Delete</button></td>
+            <form method="POST" action="/delete-traveler/">
+                <input type="hidden" name="traveler_id" value="{{this.traveler_id}}">
+                <button style="width=10px" type="submit">Delete</button>
+                </form>
         </tr>
         {{/each}}
     </tbody>
 </table>
-<script src="/js/delete_traveler.js"></script>
 
 <!-- /views/index.hbs -->
 
@@ -76,7 +78,7 @@
     <input type="text" name="input-email" id="input-email">
 
     <label for="input-phone-number">Phone Number: </label>
-    <input type="number" name="input-phone-number" id="input-phone-number">
+    <input type="text" name="input-phone-number" id="input-phone-number">
 
     <input type="submit" class="affirmButton">
     </fieldset>
