@@ -6,7 +6,7 @@
 <body>
 <div id="nav_bar">
     <button>
-        <a href="/">Travel Packages</a>
+        <a href="/">Travelers</a>
     </button>
     <button>
         <a href="travel_agents">Travel Agents</a>
@@ -51,6 +51,12 @@
             <td>{{this.description}}</td>
             <td>{{this.traveler_id}}</td>
             <td>{{this.agent_id}}</td>
+            <td>
+            <form method="POST" action="/delete-travel-package/">
+                <input type="hidden" name="package_id" value="{{this.package_id}}">
+                <button style="width=10px" type="submit">Delete</button>
+                </form>
+            </td>
         </tr>
         {{/each}}
     </tbody>

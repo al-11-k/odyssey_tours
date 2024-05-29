@@ -51,7 +51,13 @@
             <td>{{this.subtotal}}</td>
             <td>{{this.package_id}}</td>
             <td>{{this.item_id}}</td>
-            <td><button onclick="deleteBooking({{this.booking_id}})">Delete</button></td>
+            <td>
+            <form method="POST" action="/delete-booking/">
+                <input type="hidden" name="booking_id" value="{{this.booking_id}}">
+                <input type="hidden" name="package_id" value="{{this.package_id}}">
+                <button style="width=10px" type="submit">Delete</button>
+                </form>
+            </td>
         </tr>
         {{/each}}
     </tbody>
@@ -112,7 +118,7 @@
 
 </form>
 
-{{!--<script src="./js/update_person.js"></script> --}}
+
 </div>
 
 

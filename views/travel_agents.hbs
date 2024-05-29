@@ -48,6 +48,12 @@
             <td>{{this.first_name}}</td>
             <td>{{this.last_name}}</td>
             <td>{{this.email}}</td>
+            <td>
+            <form method="POST" action="/delete-travel-agent/">
+                <input type="hidden" name="agent_id" value="{{this.agent_id}}">
+                <button style="width=10px" type="submit">Delete</button>
+                </form>
+            </td>
         </tr>
         {{/each}}
     </tbody>

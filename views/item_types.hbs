@@ -47,6 +47,12 @@
         <tr>
             <td>{{this.item_type}}</td>
             <td>{{this.description}}</td>
+            <td>
+            <form method="POST" action="/delete-item-type/">
+                <input type="hidden" name="item_type" value="{{this.item_type}}">
+                <button style="width=10px" type="submit">Delete</button>
+                </form>
+            </td>
         </tr>
         {{/each}}
     </tbody>

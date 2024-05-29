@@ -52,10 +52,12 @@
             <td>{{this.last_name}}</td>
             <td>{{this.email}}</td>
             <td>{{this.phone_number}}</td>
+            <td>
             <form method="POST" action="/delete-traveler/">
                 <input type="hidden" name="traveler_id" value="{{this.traveler_id}}">
                 <button style="width=10px" type="submit">Delete</button>
                 </form>
+            </td>
         </tr>
         {{/each}}
     </tbody>

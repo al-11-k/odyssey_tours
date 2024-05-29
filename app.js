@@ -15,7 +15,7 @@ var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-PORT = 9978; //change back to 9981
+PORT = 9989; //change back to 9981
 
 // Database
 var db = require('./database/db-connector');
@@ -89,29 +89,6 @@ app.post('/delete-traveler/', function(req, res)
 
 
 
-// delete a traveler
-app.delete('/delete-traveler-ajax/', function(req,res,next){
-    let data = req.body;
-    let travelerID = parseInt(data.traveler_id);
-    let deleteTraveler = `DELETE FROM Travelers WHERE pid = ?`;
-  
-  
-          // Run the 1st query
-          db.pool.query(deleteTraveler, [travelerID], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  
-              else
-              {
-                res.sendStatus(204);
-              }
-  })});
-
-
 
 
 
@@ -147,6 +124,33 @@ app.post('/add-travel-agent-form', function(req, res)
         }
     })
 })
+
+
+
+
+// delete travel agent
+app.post('/delete-travel-agent/', function(req, res) 
+{
+    let agent_id = req.body.agent_id;
+
+    query1 = `DELETE FROM Travel_Agents WHERE agent_id = ?`;
+    db.pool.query(query1, [agent_id], function(error, rows, fields){
+
+        if (error) {
+
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        else
+        {
+            res.redirect('/travel_agents');
+        }
+    })
+})
+
+
+
 
 
 
@@ -204,6 +208,31 @@ app.post('/add-travel-package-form', function(req, res)
 
 
 
+
+// delete travel package
+app.post('/delete-travel-package/', function(req, res) 
+{
+    let package_id = req.body.package_id;
+
+    query1 = `DELETE FROM Travel_Packages WHERE package_id = ?`;
+    db.pool.query(query1, [package_id], function(error, rows, fields){
+
+        if (error) {
+
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        else
+        {
+            res.redirect('/travel_packages');
+        }
+    })
+})
+
+
+
+
 // display items
 app.get('/items', function(req, res) {
     let data = req.body;
@@ -251,6 +280,29 @@ app.post('/add-item-form', function(req, res)
 })
 
 
+// delete item
+app.post('/delete-item/', function(req, res) 
+{
+    let item_id = req.body.item_id;
+
+    query1 = `DELETE FROM Items WHERE item_id = ?`;
+    db.pool.query(query1, [item_id], function(error, rows, fields){
+
+        if (error) {
+
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        else
+        {
+            res.redirect('/items');
+        }
+    })
+})
+
+
+
 
 // display bookings
 app.get('/bookings', function(req, res) {
@@ -289,7 +341,7 @@ app.post('/add-booking-form', function(req, res)
 
 
     query1 = `INSERT INTO Bookings(quantity, item_cost, subtotal, package_id, item_id) VALUES ('${data['input-booking-quantity']}', (SELECT cost FROM Items WHERE item_id = '${data['input-booking-item-id']}'), ((SELECT cost FROM Items WHERE item_id = '${data['input-booking-item-id']}') * '${data['input-booking-quantity']}') , '${data['input-booking-package-id']}', '${data['input-booking-item-id']}')`;
-    query2 = `UPDATE Travel_Packages SET total_cost = (SELECT SUM(subtotal) FROM Bookings WHERE package_id = (SELECT package_id FROM Bookings WHERE booking_id = '${data['update-booking-id']}')) WHERE package_id = (SELECT package_id FROM Bookings WHERE booking_id = '${data['update-booking-id']}')`;
+    query2 = `UPDATE Travel_Packages SET total_cost = (SELECT SUM(subtotal) FROM Bookings WHERE package_id = '${data['input-booking-package-id']}') WHERE package_id = '${data['input-booking-package-id']}'`;
     db.pool.query(query1, function(error, rows, fields){
 
         if (error) {
@@ -316,6 +368,9 @@ app.post('/add-booking-form', function(req, res)
         }
     })
 });
+
+
+
 
 // update booking
 app.post('/update-booking-form', function(req, res) 
@@ -323,7 +378,7 @@ app.post('/update-booking-form', function(req, res)
     let data = req.body;
 
     query1 = `UPDATE Bookings SET quantity = '${data['update-booking-quantity']}', item_cost = '${data['update-booking-item-cost']}', subtotal = ('${data['update-booking-item-cost']}' * '${data['update-booking-quantity']}') WHERE booking_id = '${data['update-booking-id']}'`;
-    query2 = `UPDATE Travel_Packages SET total_cost = (SELECT SUM(subtotal) FROM Bookings WHERE package_id = (SELECT package_id FROM Bookings WHERE booking_id = '${data['update-booking-id']}')) WHERE package_id = (SELECT package_id FROM Bookings WHERE booking_id = '${data['update-booking-id']}')`;
+    query2 = `UPDATE Travel_Packages SET total_cost = (SELECT SUM(subtotal) FROM Bookings WHERE package_id = '${data['input-booking-package-id']}') WHERE package_id = '${data['input-booking-package-id']}'`;
     db.pool.query(query1, function(error, rows, fields){
 
         if (error) {
@@ -350,6 +405,43 @@ app.post('/update-booking-form', function(req, res)
         }
     })
 });
+
+
+
+// delete a booking
+app.post('/delete-booking/', function(req, res) 
+{
+    let booking_id = req.body.booking_id;
+    let package_id = req.body.package_id;
+
+    query1 = `DELETE FROM Bookings WHERE booking_id = ?`;
+    query2 = `UPDATE Travel_Packages SET total_cost = (SELECT SUM(subtotal) FROM Bookings WHERE package_id = ?) WHERE package_id = ?`;
+    db.pool.query(query1, [booking_id], function(error, rows, fields){
+
+            if (error) {
+    
+                console.log(error)
+                res.sendStatus(400);
+            }
+    
+            else
+            {
+                db.pool.query(query2, [package_id, package_id], function(error, rows, fields){
+                    if (error) {
+                        console.log(error)
+                        res.sendStatus(400);
+                }
+        
+                    else {
+                        res.redirect('/bookings');
+    
+                    }
+    
+    
+                })
+            }
+        })
+    });
 
 
 
@@ -384,28 +476,32 @@ app.post('/add-item-type-form', function(req, res)
 
         else
         {
-            res.redirect('item_types');
+            res.redirect('/item_types');
         }
     })
 })
 
 
-// delete traveler
-app.delete('/delete-traveler-ajax', function(req, res, next) {
-    let data = req.body;
-    let traveler_id = parseInt(data.id);
-    let deleteTraveler = `DELETE FROM Travelers WHERE id = ?`;
+// delete item type
+app.post('/delete-item-type/', function(req, res) 
+{
+    let item_type = req.body.item_type;
 
-    // Run the query
-    db.pool.query(deleteTraveler, [traveler_id], function(error, rows, fields) {
+    query1 = `DELETE FROM Item_Types WHERE item_type = ?`;
+    db.pool.query(query1, [item_type], function(error, rows, fields){
+
         if (error) {
-            console.log(error);
+
+            console.log(error)
             res.sendStatus(400);
-        } else {
-            res.sendStatus(204);
         }
-    });
-});
+
+        else
+        {
+            res.redirect('/item_types');
+        }
+    })
+})
 
 
 /*
