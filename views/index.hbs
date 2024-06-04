@@ -87,4 +87,41 @@
 </form>
 </div>
 
+
+
+<div id="insert">
+
+<form id="update-traveler-form" method="POST" action="/update-traveler-form">
+<legend><strong>Update a Traveler</strong></legend>
+<fieldset>
+    <label for="update-traveler-id">Traveler ID: </label>
+    <select name="update-traveler-id" id="mySelect">
+        <option value="test">Select an ID</option>
+        {{#each data}}
+        <option value="{{this.traveler_id}}">{{this.traveler_id}}</option>
+        {{/each}}
+    </select>
+
+    <label for="update-traveler-first-name">First Name: </label>
+    <input type="text" name="update-traveler-first-name" id="update-traveler-first-name">
+
+    <label for="update-traveler-last-name">Last Name: </label>
+    <input type="text" name="update-traveler-last-name" id="update-traveler-last-name">
+
+    <label for="update-traveler-email">Email: </label>
+    <input type="text" name="update-traveler-email" id="update-traveler-email">
+
+    <label for="update-traveler-phone-number">Phone Number: </label>
+    <input type="text" name="update-traveler-phone-number" id="update-traveler-phone-number">
+
+    
+    
+    <input type="submit" class="affirmButton">
+
+</fieldset>
+</form>
+
+
+</div>
+
 </body>

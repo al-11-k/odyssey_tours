@@ -4,6 +4,7 @@ body {
     color: #F4EFEE;
     text-align: center;
     display:grid;
+    width: 100%
 }
 
 a {
@@ -30,11 +31,16 @@ button:active {
 }
 
 table{
-    margin: 70px 300px;
+    margin: 70px 10%;
     background-color: #391b71;
     padding: 100px;
     border-collapse: collapse;
 }
+
+th, td {
+    padding: 10px 20px; 
+    text-align: left; 
+  }
 
 #browse {
     margin: auto;
@@ -62,6 +68,13 @@ fieldset {
     background-color: #391b71;
     padding: 20px 10px;
 
+}
+
+.update {
+    border-radius: 6px;
+    border-color: #f4efee98;
+    background-color: #391b71;
+    padding: 20px 10px; 
 }
 
 .buttonDivs {

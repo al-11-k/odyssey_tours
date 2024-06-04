@@ -15,7 +15,7 @@ var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-PORT = 9989; //change back to 9981
+PORT = 9989; //change back to 9989
 
 // Database
 var db = require('./database/db-connector');
@@ -88,6 +88,35 @@ app.post('/delete-traveler/', function(req, res)
 
 
 
+// update a traveler
+app.post('/update-traveler-form', function(req, res) 
+{
+    let data = req.body;
+
+    query1 = `UPDATE Travelers SET first_name = '${data['update-traveler-first-name']}', last_name = '${data['update-traveler-last-name']}', email = '${data['update-traveler-email']}', phone_number = '${data['update-traveler-phone-number']}' WHERE traveler_id = '${data['update-traveler-id']}'`;
+
+    db.pool.query(query1, function(error, rows, fields){
+
+        if (error) {
+
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        else
+        {
+
+            res.redirect('/');
+
+                }
+
+    })
+});
+
+
+
+
+
 
 
 
@@ -152,6 +181,34 @@ app.post('/delete-travel-agent/', function(req, res)
 
 
 
+// update a travel_agent
+app.post('/update-travel-agent-form', function(req, res) 
+{
+    let data = req.body;
+
+    query1 = `UPDATE Travel_Agents SET first_name = '${data['update-travel-agent-first-name']}', last_name = '${data['update-travel-agent-last-name']}', email = '${data['update-travel-agent-email']}' WHERE agent_id = '${data['update-travel-agent-id']}'`;
+
+    db.pool.query(query1, function(error, rows, fields){
+
+        if (error) {
+
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        else
+        {
+
+            res.redirect('/travel_agents');
+
+                }
+
+    })
+});
+
+
+
+
 
 
 // display travel packages
@@ -170,9 +227,33 @@ app.get('/travel_packages', function(req, res) {
                 
                 let travel_agents = rows;
 
+                let agentmap = {}
+                travel_agents.map(travel_agent => {
+                    let id = parseInt(travel_agent.agent_id, 10);
+
+                    agentmap[id] = `${travel_agent.first_name} ${travel_agent.last_name} (${travel_agent.agent_id})`
+                })
+
+                travel_packages = travel_packages.map(travel_agent => {
+                    return Object.assign(travel_agent, {agent_id: agentmap[travel_agent.agent_id]})
+                })
+
+
                 db.pool.query(query3, (error, rows, fields) => {
 
                     let travelers = rows;
+
+                    let travelermap = {}
+                    travelers.map(traveler => {
+                        let id = parseInt(traveler.traveler_id, 10);
+
+                        travelermap[id] = `${traveler.first_name} ${traveler.last_name} (${traveler.traveler_id})`
+                    })
+
+                    travel_packages = travel_packages.map(traveler => {
+                        return Object.assign(traveler, {traveler_id: travelermap[traveler.traveler_id]})
+                    })
+
                     return res.render('travel_packages', {data: travel_packages, travel_agents: travel_agents, travelers: travelers});
             })
         })
@@ -189,7 +270,7 @@ app.post('/add-travel-package-form', function(req, res)
 {
     let data = req.body;
 
-    let query1 = `INSERT INTO Travel_Packages(date, total_cost, description, traveler_id, agent_id) VALUES ('${data['input-package-date']}', '${data['input-package-total-cost']}', '${data['input-package-description']}', '${data['input-package-traveler-id']}', '${data['input-package-agent-id']}')`;
+    let query1 = `INSERT INTO Travel_Packages(date, total_cost, description, traveler_id, agent_id) VALUES ('${data['input-package-date']}', 0, '${data['input-package-description']}', '${data['input-package-traveler-id']}', '${data['input-package-agent-id']}')`;
     db.pool.query(query1, function(error, rows, fields){
 
         if (error) {
@@ -232,6 +313,33 @@ app.post('/delete-travel-package/', function(req, res)
 
 
 
+// update an travel package
+app.post('/update-travel-package-form', function(req, res) 
+{
+    let data = req.body;
+
+    query1 = `UPDATE Travel_Packages SET date ='${data['update-travel-package-date']}', description = '${data['update-travel-package-description']}', agent_id = '${data['update-travel-package-agent']}' WHERE package_id = '${data['update-travel-package-id']}'`;
+
+    db.pool.query(query1, function(error, rows, fields){
+
+        if (error) {
+
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        else
+        {
+
+            res.redirect('/travel_packages');
+
+                }
+
+    })
+});
+
+
+
 
 // display items
 app.get('/items', function(req, res) {
@@ -245,6 +353,20 @@ app.get('/items', function(req, res) {
             let items = rows;
             
             db.pool.query(query2, (error, rows, fields) => {
+
+                let item_types_rows = rows;
+
+                let typemap = {}
+                item_types_rows.map(item_type_row => {
+                    let id = parseInt(item_type_row.item_type, 10);
+
+                    typemap[id] = `${item_type_row.description} (${item_type_row.item_type})`
+                })
+
+                items = items.map(item_type_row => {
+                    return Object.assign(item_type_row, {item_type: typemap[item_type_row.item_type]})
+                })
+
                 
                 let item_types = rows;
                     return res.render('items', {data: items, item_types: item_types});
@@ -254,8 +376,6 @@ app.get('/items', function(req, res) {
 
 
 
-
-// DROP DOWN MIGHT WORK HAVEN'T TRIED IT WITH VPN YET
 // insert item
 
 app.post('/add-item-form', function(req, res) 
@@ -303,6 +423,36 @@ app.post('/delete-item/', function(req, res)
 
 
 
+// update an item
+
+
+app.post('/update-item-form', function(req, res) 
+{
+    let data = req.body;
+
+    query1 = `UPDATE Items SET description = '${data['update-item-description']}', cost = '${data['update-item-cost']}' WHERE item_id = '${data['update-item-id']}'`;
+
+    db.pool.query(query1, function(error, rows, fields){
+
+        if (error) {
+
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        else
+        {
+
+            res.redirect('/items');
+
+                }
+
+    })
+});
+
+
+
+
 
 // display bookings
 app.get('/bookings', function(req, res) {
@@ -321,9 +471,34 @@ app.get('/bookings', function(req, res) {
             db.pool.query(query2, (error, rows, fields) => {
                 
                 let travel_packages = rows;
+
+                let packagemap = {}
+                travel_packages.map(travel_package => {
+                    let id = parseInt(travel_package.package_id, 10);
+
+                    packagemap[id] = `${travel_package.description} (${travel_package.package_id})`
+                })
+
+                bookings = bookings.map(travel_package => {
+                    return Object.assign(travel_package, {package_id: packagemap[travel_package.package_id]})
+                })
+
+
                 db.pool.query(query3, (error, rows, fields) => {
 
                     let items = rows;
+
+                    let itemmap = {}
+                    items.map(item => {
+                        let id = parseInt(item.item_id, 10);
+
+                        itemmap[id] = `${item.description} (${item.item_id})`
+                    })
+
+                    bookings = bookings.map(item => {
+                        return Object.assign(item, {item_id: itemmap[item.item_id]})
+                    })
+                    
                     return res.render('bookings', {data: bookings, travel_packages: travel_packages, items: items});
             })
         })
@@ -333,41 +508,58 @@ app.get('/bookings', function(req, res) {
 
 
 
+// insert a booking -> Travel Packages is Nullable
 
-// insert a booking
-app.post('/add-booking-form', function(req, res) 
-{
+app.post('/add-booking-form', function(req, res) {
     let data = req.body;
 
+    let package_id = parseInt(req.body['input-booking-package-id']);
+    if (isNaN(package_id)) 
+    {
+        package_id = null;
+    }
 
-    query1 = `INSERT INTO Bookings(quantity, item_cost, subtotal, package_id, item_id) VALUES ('${data['input-booking-quantity']}', (SELECT cost FROM Items WHERE item_id = '${data['input-booking-item-id']}'), ((SELECT cost FROM Items WHERE item_id = '${data['input-booking-item-id']}') * '${data['input-booking-quantity']}') , '${data['input-booking-package-id']}', '${data['input-booking-item-id']}')`;
-    query2 = `UPDATE Travel_Packages SET total_cost = (SELECT SUM(subtotal) FROM Bookings WHERE package_id = '${data['input-booking-package-id']}') WHERE package_id = '${data['input-booking-package-id']}'`;
-    db.pool.query(query1, function(error, rows, fields){
+    let quantity = data['input-booking-quantity'];
+    let item_id = data['input-booking-item-id'];
 
+    let query1 = `
+        INSERT INTO Bookings (quantity, item_cost, subtotal, package_id, item_id) 
+        VALUES (?, 
+                (SELECT cost FROM Items WHERE item_id = ?), 
+                (SELECT cost FROM Items WHERE item_id = ?) * ?, 
+                ?, 
+                ?)`;
+
+    let query1Params = [quantity, item_id, item_id, quantity, package_id, item_id];
+
+    db.pool.query(query1, query1Params, function(error, results, fields) {
         if (error) {
-
-            console.log(error)
+            console.log(error);
             res.sendStatus(400);
-        }
+        } else {
+            if (package_id !== null) {
+                let query2 = `
+                    UPDATE Travel_Packages 
+                    SET total_cost = (SELECT SUM(subtotal) FROM Bookings WHERE package_id = ?) 
+                    WHERE package_id = ?`;
+                
+                let query2Params = [package_id, package_id];
 
-        else
-        {
-            db.pool.query(query2, function(error, rows, fields){
-                if (error) {
-                    console.log(error)
-                    res.sendStatus(400);
+                db.pool.query(query2, query2Params, function(error, results, fields) {
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus(400);
+                    } else {
+                        res.redirect('/bookings');
+                    }
+                });
+            } else {
+                res.redirect('/bookings');
             }
-    
-                else {
-                    res.redirect('/bookings');
-
-                }
-
-
-            })
         }
-    })
+    });
 });
+
 
 
 
@@ -502,6 +694,34 @@ app.post('/delete-item-type/', function(req, res)
         }
     })
 })
+
+
+
+// update item types
+
+app.post('/update-item-type-form', function(req, res) 
+{
+    let data = req.body;
+
+    query1 = `UPDATE Item_Types SET description = '${data['update-item-type-description']}' WHERE item_type = '${data['update-item-type-id']}'`;
+
+    db.pool.query(query1, function(error, rows, fields){
+
+        if (error) {
+
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        else
+        {
+
+            res.redirect('/item_types');
+
+                }
+
+    })
+});
 
 
 /*

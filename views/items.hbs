@@ -65,7 +65,7 @@
 <div id="insert">
 <form id="add-item-form" method="POST" action="/add-item-form">
     <legend><strong>Add an Item</strong></legend>
-    <fieldset class="fields">
+    <fieldset class="update">
     <label for="input-item-description">Description: </label>
     <input type="text" name="input-item-description" id="input-item-description">
     
@@ -83,6 +83,35 @@
     <input type="submit" class="affirmButton">
 </fieldset>
 </form>
+</div>
+
+
+<div id="insert">
+
+<form id="update-item-form" method="POST" action="/update-item-form">
+<legend><strong>Update an Item</strong></legend>
+    <fieldset class="fields">
+    <label for="update-item-id">Item ID: </label>
+    <select name="update-item-id" id="mySelect">
+        <option value="test">Select an ID</option>
+        {{#each data}}
+        <option value="{{this.item_id}}">{{this.item_id}}</option>
+        {{/each}}
+    </select>
+
+    <label for="update-item-description">Description: </label>
+    <input type="text" name="update-item-description" id="update-item-description">
+
+    <label for="update-item-cost">Cost: </label>
+    <input type="float-input" name="update-item-cost" id="update-item-cost">
+    
+    
+    <input type="submit" class="affirmButton">
+
+</fieldset>
+</form>
+
+
 </div>
 
 

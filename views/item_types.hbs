@@ -71,4 +71,29 @@
 </div>
 
 
+
+<div id="insert">
+
+<form id="update-item-type-form" method="POST" action="/update-item-type-form">
+<legend><strong>Update an Item Type</strong></legend>
+<fieldset>
+    <label for="update-item-type-id">Item Type: </label>
+    <select name="update-item-type-id" id="mySelect">
+        <option value="test">Select an ID</option>
+        {{#each data}}
+        <option value="{{this.item_type}}">{{this.item_type}}</option>
+        {{/each}}
+    </select>
+
+    <label for="update-item-type-description">Description </label>
+    <input type="text" name="update-item-type-description" id="update-item-type-description">
+    
+    <input type="submit" class="affirmButton">
+</fieldset>
+</form>
+
+
+</div>
+
+
 </body>

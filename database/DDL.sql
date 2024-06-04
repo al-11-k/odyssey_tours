@@ -169,7 +169,7 @@ CREATE TABLE Bookings (
   quantity int NOT NULL,
   item_cost decimal(6,2) NOT NULL,
   subtotal decimal(6,2) NOT NULL,
-  package_id int NOT NULL,
+  package_id int,
   item_id int NOT NULL,
   PRIMARY KEY (booking_id),
   FOREIGN KEY (package_id) REFERENCES Travel_Packages(package_id) ON DELETE CASCADE,

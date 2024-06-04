@@ -80,4 +80,34 @@
 </form>
 </div>
 
+<div id="insert">
+
+<form id="update-travel-agent-form" method="POST" action="/update-travel-agent-form">
+<legend><strong>Update a Travel Agent</strong></legend>
+<fieldset>
+    <label for="update-travel-agent-id">Agent ID: </label>
+    <select name="update-travel-agent-id" id="mySelect">
+        <option value="test">Select an ID</option>
+        {{#each data}}
+        <option value="{{this.agent_id}}">{{this.agent_id}}</option>
+        {{/each}}
+    </select>
+
+    <label for="update-travel-agent-first-name">First Name: </label>
+    <input type="text" name="update-travel-agent-first-name" id="update-travel-agent-first-name">
+
+    <label for="update-travel-agent-last-name">Last Name: </label>
+    <input type="text" name="update-travel-agent-last-name" id="update-travel-agent-last-name">
+
+    <label for="update-travel-agent-email">Email: </label>
+    <input type="text" name="update-travel-agent-email" id="update-travel-agent-email">
+    
+    <input type="submit" class="affirmButton">
+
+</fieldset>
+</form>
+
+
+</div>
+
 </body>
