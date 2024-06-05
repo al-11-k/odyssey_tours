@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings</title>
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+    <script>
+        function showform(dowhat) {
+              /*
+              * four DIVS: browse, insert, update, delete
+              * this function sets one visible the others not
+              */
+              if (dowhat == 'insert'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'block';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'none';
+              }
+              else if (dowhat == 'update'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'block';
+                  document.getElementById('delete').style.display = 'none';
+              }
+              else if (dowhat == 'delete'){
+                  document.getElementById('browse').style.display = 'none';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'block';
+              }
+        else if (dowhat == 'all'){
+                  document.getElementById('browse').style.display = 'block';
+                  document.getElementById('insert').style.display = 'block';
+                  document.getElementById('update').style.display = 'block';
+                  document.getElementById('delete').style.display = 'block';
+              }
+              else { //by default display browse
+                  document.getElementById('browse').style.display = 'block';
+                  document.getElementById('insert').style.display = 'none';
+                  document.getElementById('update').style.display = 'none';
+                  document.getElementById('delete').style.display = 'none';
+              }
+          }
+  
+        function newBooking() { showform('insert'); }
+        function updateBooking(pid) { showform('update'); }
+        function deleteBooking(pid) { showform ('delete'); }
+        function browseBookings() { showform ('browse'); }
+        function showAll() { showform ('all'); }
+      </script>
+</head>
+<body>
+    <h1>Bookings</h1>
+    <div id="nav_bar">
+        <button>
+            <a href="travelers.html">Travelers</a>
+        </button>
+        
+        <button>
+            <a href="travel_agents.html">Travel Agents</a>
+        </button> 
+
+        <button>
+            <a href="travel_packages.html">Travel Packages</a>
+        </button>
+
+        <button>
+            <a href="bookings.html">Bookings</a>
+        </button>
+
+        <button>
+            <a href="items.html">Items</a>
+        </button>
+
+</body>
+</html>
