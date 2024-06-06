@@ -3,6 +3,8 @@
 // Adapted from nodejs-starter-app on github.com provided to students via Canvas/course materials
 // Code was copied and pasted from the code snippets and changed to fit the database needs for project
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <body>
 <div id="nav_bar">
     <h1><strong>Odyssey Tours</strong></h1>
@@ -28,7 +30,8 @@
         <a href="item_types">Item Types</a>
     </button>
 </div>
-<table id="travel-agent-table">
+
+<table id="travelers-table">
 
     {{!-- Header section --}}
     <thead>
@@ -47,14 +50,15 @@
 
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
-        <tr>
-            <td>{{this.agent_id}}</td>
+        <tr data-value={{this.traveler_id}}>
+            <td>{{this.traveler_id}}</td>
             <td>{{this.first_name}}</td>
             <td>{{this.last_name}}</td>
             <td>{{this.email}}</td>
+            <td>{{this.phone_number}}</td>
             <td>
-            <form method="POST" action="/delete-travel-agent/">
-                <input type="hidden" name="agent_id" value="{{this.agent_id}}">
+            <form method="POST" action="/delete-traveler/">
+                <input type="hidden" name="traveler_id" value="{{this.traveler_id}}">
                 <button style="width=10px" type="submit">Delete</button>
                 </form>
             </td>
@@ -67,44 +71,54 @@
 
 {{!-- Form to add a record to the table using AJAX --}}
 <div id="insert">
-<form id="add-travel-agent-form" method="POST" action="/add-travel-agent-form">
-    <legend><strong>Add a Travel Agent</strong></legend>
+<form id="add-traveler-form" method="POST" action="/add-traveler-form">
+    <legend><strong>Add Traveler</strong></legend>
     <fieldset class="fields">
-    <label for="input-first-name-agent">First Name: </label>
-    <input type="text" name="input-first-name-agent" id="input-first-name-agent">
+    <label for="input-first-name">First Name: </label>
+    <input type="text" name="input-first-name" id="input-first-name">
     
-    <label for="input-last-nam-agnete">Last Name: </label>
-    <input type="text" name="input-last-name-agent" id="input-last-name-agent">
+    <label for="input-last-name">Last Name: </label>
+    <input type="text" name="input-last-name" id="input-last-name">
 
-    <label for="input-email-agent">Email: </label>
-    <input type="text" name="input-email-agent" id="input-email-agent">
+    <label for="input-email">Email: </label>
+    <input type="text" name="input-email" id="input-email">
+
+    <label for="input-phone-number">Phone Number: </label>
+    <input type="text" name="input-phone-number" id="input-phone-number">
 
     <input type="submit" class="affirmButton">
-</fieldset>
+    </fieldset>
 </form>
 </div>
 
+
+
 <div id="insert">
 
-<form id="update-travel-agent-form" method="POST" action="/update-travel-agent-form">
-<legend><strong>Update a Travel Agent</strong></legend>
+<form id="update-traveler-form" method="POST" action="/update-traveler-form">
+<legend><strong>Update a Traveler</strong></legend>
 <fieldset>
-    <label for="update-travel-agent-id">Agent ID: </label>
-    <select name="update-travel-agent-id" id="mySelect">
+    <label for="update-traveler-id">Traveler ID: </label>
+    <select name="update-traveler-id" id="mySelect">
         <option value="test">Select an ID</option>
         {{#each data}}
-        <option value="{{this.agent_id}}">{{this.agent_id}}</option>
+        <option value="{{this.traveler_id}}">{{this.traveler_id}}</option>
         {{/each}}
     </select>
 
-    <label for="update-travel-agent-first-name">First Name: </label>
-    <input type="text" name="update-travel-agent-first-name" id="update-travel-agent-first-name">
+    <label for="update-traveler-first-name">First Name: </label>
+    <input type="text" name="update-traveler-first-name" id="update-traveler-first-name">
 
-    <label for="update-travel-agent-last-name">Last Name: </label>
-    <input type="text" name="update-travel-agent-last-name" id="update-travel-agent-last-name">
+    <label for="update-traveler-last-name">Last Name: </label>
+    <input type="text" name="update-traveler-last-name" id="update-traveler-last-name">
 
-    <label for="update-travel-agent-email">Email: </label>
-    <input type="text" name="update-travel-agent-email" id="update-travel-agent-email">
+    <label for="update-traveler-email">Email: </label>
+    <input type="text" name="update-traveler-email" id="update-traveler-email">
+
+    <label for="update-traveler-phone-number">Phone Number: </label>
+    <input type="text" name="update-traveler-phone-number" id="update-traveler-phone-number">
+
+    
     
     <input type="submit" class="affirmButton">
 

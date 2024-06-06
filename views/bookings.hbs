@@ -5,8 +5,12 @@
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
 <body>
 <div id="nav_bar">
+    <h1><strong>Odyssey Tours</strong></h1>
     <button>
-        <a href="/">Travelers</a>
+        <a href="/">Home</a>
+    </button>
+    <button>
+        <a href="travelers">Travelers</a>
     </button>
     <button>
         <a href="travel_agents">Travel Agents</a>
@@ -105,6 +109,14 @@
         <option value="test">Select an ID</option>
         {{#each data}}
         <option value="{{this.booking_id}}">{{this.booking_id}}</option>
+        {{/each}}
+    </select>
+
+    <label for="update-booking-package-id">Package: </label>
+    <select name="update-booking-package-id" id="update-booking-package-id">
+        <option value=""></option>
+        {{#each travel_packages}}
+        <option value="{{this.package_id}}">{{this.description}}</option>
         {{/each}}
     </select>
 

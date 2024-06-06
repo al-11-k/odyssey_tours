@@ -70,6 +70,12 @@ fieldset {
 
 }
 
+.od-description{
+    margin-top: 100px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
 .update {
     border-radius: 6px;
     border-color: #f4efee98;

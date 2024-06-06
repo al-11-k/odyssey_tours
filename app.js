@@ -30,14 +30,23 @@ app.set('view engine', '.hbs');
 app.use(express.static('public'));
 
 
-// display travelers
+// display home page
 app.get('/', function(req, res)
+    {   
+
+            res.render('index');                  
+        })   ;                                                                                                          
+
+
+
+// display travelers
+app.get('/travelers', function(req, res)
     {  
         let query1 = "SELECT * FROM Travelers;";               
 
         db.pool.query(query1, function(error, rows, fields){    
 
-            res.render('index', {data: rows});                  
+            res.render('travelers', {data: rows});                  
         })                                                      
     });                                                         
 
@@ -58,7 +67,7 @@ app.post('/add-traveler-form', function(req, res)
 
         else
         {
-            res.redirect('/');
+            res.redirect('/travelers');
         }
     })
 })
@@ -81,7 +90,7 @@ app.post('/delete-traveler/', function(req, res)
 
         else
         {
-            res.redirect('/');
+            res.redirect('/travelers');
         }
     })
 })
@@ -106,7 +115,7 @@ app.post('/update-traveler-form', function(req, res)
         else
         {
 
-            res.redirect('/');
+            res.redirect('/travelers');
 
                 }
 
@@ -472,6 +481,8 @@ app.get('/bookings', function(req, res) {
                 
                 let travel_packages = rows;
 
+                travel_packages.unshift({ package_id: null, description: 'None' }); //
+
                 let packagemap = {}
                 travel_packages.map(travel_package => {
                     let id = parseInt(travel_package.package_id, 10);
@@ -563,39 +574,51 @@ app.post('/add-booking-form', function(req, res) {
 
 
 
-
-// update booking
-app.post('/update-booking-form', function(req, res) 
-{
+// update a booking -> Travel Packages is Nullable
+app.post('/update-booking-form', function(req, res) {
     let data = req.body;
 
-    query1 = `UPDATE Bookings SET quantity = '${data['update-booking-quantity']}', item_cost = '${data['update-booking-item-cost']}', subtotal = ('${data['update-booking-item-cost']}' * '${data['update-booking-quantity']}') WHERE booking_id = '${data['update-booking-id']}'`;
-    query2 = `UPDATE Travel_Packages SET total_cost = (SELECT SUM(subtotal) FROM Bookings WHERE package_id = '${data['input-booking-package-id']}') WHERE package_id = '${data['input-booking-package-id']}'`;
-    db.pool.query(query1, function(error, rows, fields){
+    let package_id = parseInt(req.body['update-booking-package-id']);
+    if (isNaN(package_id)) 
+    {
+        package_id = null;
+    }
 
+    let booking_id = data['update-booking-id'];
+    let quantity = data['update-booking-quantity'];
+    let item_cost = data['update-booking-item-cost'];
+
+    let query1 = `
+        UPDATE Bookings SET quantity = ?, item_cost = ?, subtotal = (? * ?), package_id = ? WHERE booking_id = ?`;
+
+    let query1Params = [quantity, item_cost, quantity, item_cost, package_id, booking_id];
+
+    db.pool.query(query1, query1Params, function(error, results, fields) {
         if (error) {
-
-            console.log(error)
+            console.log(error);
             res.sendStatus(400);
-        }
+        } else {
+            if (package_id !== null) {
+                let query2 = `
+                    UPDATE Travel_Packages 
+                    SET total_cost = (SELECT SUM(subtotal) FROM Bookings WHERE package_id = ?) 
+                    WHERE package_id = ?`;
+                
+                let query2Params = [package_id, package_id];
 
-        else
-        {
-            db.pool.query(query2, function(error, rows, fields){
-                if (error) {
-                    console.log(error)
-                    res.sendStatus(400);
+                db.pool.query(query2, query2Params, function(error, results, fields) {
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus(400);
+                    } else {
+                        res.redirect('/bookings');
+                    }
+                });
+            } else {
+                res.redirect('/bookings');
             }
-    
-                else {
-                    res.redirect('/bookings');
-
-                }
-
-
-            })
         }
-    })
+    });
 });
 
 

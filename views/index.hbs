@@ -1,14 +1,11 @@
-{{!-- // Citation for the following file:
-// Date: 05/21/2024
-// Adapted from nodejs-starter-app on github.com provided to students via Canvas/course materials
-// Code was copied and pasted from the code snippets and changed to fit the database needs for project
-// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <body>
 <div id="nav_bar">
+    <h1><strong>Odyssey Tours</strong></h1>
     <button>
-        <a href="/">Travelers</a>
+        <a href="/">Home</a>
+    </button>
+    <button>
+        <a href="travelers">Travelers</a>
     </button>
     <button>
         <a href="travel_agents">Travel Agents</a>
@@ -27,101 +24,13 @@
     </button>
 </div>
 
-<table id="travelers-table">
+<div class="od-description">
+        <p>Traveling is a tedious and stressful process for some. When traveling, there are many factors to think of such as location, cost, hotel, transportation, etc. 
+            Many times when getting ready to book a trip, too little or too many options are available to travelers with no detail as to whether or not this could be the best or most cost efficient option for them. 
+            This can lead to excess time researching, causing more work for the traveler. When going on vacation, nobody wants to stress the little things, they want to relax! 
+            Odyssey Tours will fix the troubles travelers face with finding affordable, fun destinations so that when booking it can feel like a vacation during the booking process and during the trip itself.
+            Bookings can be browsed and selected by a traveler themself or bookings can be recommended and made with the assistance of one of Odyssey Tours’ many experienced travel agents.</p>
+    </div>
 
-    {{!-- Header section --}}
-    <thead>
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-            <th>delete</th>
-        </tr>
-    </thead>
-
-    {{!-- Body section --}}
-    <tbody>
-
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
-        {{#each data}}
-        <tr data-value={{this.traveler_id}}>
-            <td>{{this.traveler_id}}</td>
-            <td>{{this.first_name}}</td>
-            <td>{{this.last_name}}</td>
-            <td>{{this.email}}</td>
-            <td>{{this.phone_number}}</td>
-            <td>
-            <form method="POST" action="/delete-traveler/">
-                <input type="hidden" name="traveler_id" value="{{this.traveler_id}}">
-                <button style="width=10px" type="submit">Delete</button>
-                </form>
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-
-<!-- /views/index.hbs -->
-
-{{!-- Form to add a record to the table using AJAX --}}
-<div id="insert">
-<form id="add-traveler-form" method="POST" action="/add-traveler-form">
-    <legend><strong>Add Traveler</strong></legend>
-    <fieldset class="fields">
-    <label for="input-first-name">First Name: </label>
-    <input type="text" name="input-first-name" id="input-first-name">
-    
-    <label for="input-last-name">Last Name: </label>
-    <input type="text" name="input-last-name" id="input-last-name">
-
-    <label for="input-email">Email: </label>
-    <input type="text" name="input-email" id="input-email">
-
-    <label for="input-phone-number">Phone Number: </label>
-    <input type="text" name="input-phone-number" id="input-phone-number">
-
-    <input type="submit" class="affirmButton">
-    </fieldset>
-</form>
-</div>
-
-
-
-<div id="insert">
-
-<form id="update-traveler-form" method="POST" action="/update-traveler-form">
-<legend><strong>Update a Traveler</strong></legend>
-<fieldset>
-    <label for="update-traveler-id">Traveler ID: </label>
-    <select name="update-traveler-id" id="mySelect">
-        <option value="test">Select an ID</option>
-        {{#each data}}
-        <option value="{{this.traveler_id}}">{{this.traveler_id}}</option>
-        {{/each}}
-    </select>
-
-    <label for="update-traveler-first-name">First Name: </label>
-    <input type="text" name="update-traveler-first-name" id="update-traveler-first-name">
-
-    <label for="update-traveler-last-name">Last Name: </label>
-    <input type="text" name="update-traveler-last-name" id="update-traveler-last-name">
-
-    <label for="update-traveler-email">Email: </label>
-    <input type="text" name="update-traveler-email" id="update-traveler-email">
-
-    <label for="update-traveler-phone-number">Phone Number: </label>
-    <input type="text" name="update-traveler-phone-number" id="update-traveler-phone-number">
-
-    
-    
-    <input type="submit" class="affirmButton">
-
-</fieldset>
-</form>
-
-
-</div>
 
 </body>
