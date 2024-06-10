@@ -1,4 +1,8 @@
-
+-- // Citation for the following file:
+-- // Date: 05/07/2024
+-- // Adapted from bsg_sample_data_manipulation_queries found on the Project Step 3 Draft submittal course page
+-- // Code was used as inspiration/gave ideas of how to approach DML file
+-- // Source URL: https://canvas.oregonstate.edu/courses/1958399/assignments/9589658?module_item_id=24181850
 
 --------------------------------------------------------
 -- Travelers

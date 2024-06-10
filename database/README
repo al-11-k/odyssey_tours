@@ -1,0 +1,32 @@
+-- Step 6 - Group 96 Portfolio Project
+-- Odyssey Tours
+-- Ally Karlis & Brittany Healey
+-- Oregon State University - CS 340
+-- 06/10/2024
+
+Project includes:
+- DML & DDL SQL Files
+- HTML and CSS Files
+- hbs Files
+- app.js
+- db-connector.js
+
+To run project visit: http://classwork.engr.oregonstate.edu:9989/
+
+Project Description:
+
+Traveling is a tedious and stressful process for some. When traveling, there are many factors to think of such as location, cost, hotel, transportation, etc. Many times when getting ready to book a trip, too few or too many options are available to travelers with no detail whether or not this could be the best or most cost-efficient option for them. This can lead to excess time researching, causing more work for the traveler. When going on vacation, nobody wants to stress the little things, they want to relax! Odyssey Tours will fix the troubles travelers face with finding affordable, fun destinations so that when booking it can feel like a vacation during the booking process and during the trip itself. Bookings can be browsed and selected by a traveler themselves or bookings can be recommended and made with the assistance of one of Odyssey Tours’ many experienced travel agents.
+
+Odyssey Tours is a tour company that makes $1 million per year, taking 20,000 travelers on one of their 200 tours. A database is needed to record the total sales for the company, as well as the individual sales completed by each agent. A database driven website will record Bookings of Items in Travel Packages to Travelers and Travel_Agents.
+
+Works Cited for Project:
+
+// Date: 05/07/2024
+// DML adapted from bsg_sample_data_manipulation_queries found on the Project Step 3 Draft submittal course page
+// Code was used as inspiration/gave ideas of how to approach DML file
+// Source URL: https://canvas.oregonstate.edu/courses/1958399/assignments/9589658?module_item_id=24181850
+
+// Date: 05/21/2024
+// app.js, db-connector.js, hbs files adapted from nodejs-starter-app on github.com provided to students via Canvas/course materials
+// Code was copied and pasted from the code snippets and changed to fit the database needs for project
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
